@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/gst-portal",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
