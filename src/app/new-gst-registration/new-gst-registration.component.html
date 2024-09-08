@@ -1,0 +1,384 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h3 class="text-theme-primary">Basic Details</h3>
+            <p></p>
+        </div>
+    </div>
+    <form action="#" [formGroup]="gstForm" (ngSubmit)="onSubmit()">
+        <div class="card shadow-effect">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="Title" class="formItemLabelMargin">Applicant's Name <span
+                                    class="mandatory">*</span></label>
+                            <input formControlName="title" type="text" placeholder="Enter Applicant's Name"
+                                class="form-control" name="" value="" id=""
+                                [ngClass]="{'is-invalid': fc['title'].touched && fc['title'].invalid}">
+
+                            <div class="alert alert-danger"
+                                *ngIf="fc['title'].touched && gstForm.controls['title'].hasError('required')">
+                                Applicant's Name is required</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="fatherName" class="formItemLabelMargin">Father's Name <span
+                                    class="mandatory">*</span></label>
+                            <input formControlName="fatherName" type="text" class="form-control" name="" value="" id=""
+                                placeholder="Enter Father's Name"
+                                [ngClass]="{'is-invalid': fc['fatherName'].touched && fc['fatherName'].invalid}">
+
+                            <div class="alert alert-danger"
+                                *ngIf="fc['fatherName'].touched && fc['fatherName'].invalid && gstForm.controls['fatherName'].hasError('required')">
+                                Father's Name is required</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="panNumber" class="formItemLabelMargin">PAN Number <span
+                                    class="mandatory">*</span></label>
+                            <input formControlName="panNumber" type="text" class="form-control" name="" value="" id=""
+                                [ngClass]="{'is-invalid': fc['panNumber'].touched && fc['panNumber'].invalid}"
+                                placeholder="AAABB1234C">
+
+                            <div class="alert alert-danger"
+                                *ngIf="fc['panNumber'].touched && fc['panNumber'].invalid && gstForm.controls['panNumber'].hasError('required')">
+                                PAN Number is required</div>
+                            <div class="alert alert-danger"
+                                *ngIf="fc['panNumber'].touched && fc['panNumber'].invalid && gstForm.controls['panNumber'].hasError('minlength')">
+                                PAN Number must be atleast 10 character long.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="DOB" class="formItemLabelMargin">Date of Birth <span
+                                    class="mandatory">*</span></label>
+                            <input formControlName="dateOfBirth" type="date" class="form-control" name="" value="" id=""
+                                [ngClass]="{'is-invalid': fc['dateOfBirth'].touched && fc['dateOfBirth'].invalid}">
+
+                            <div class="alert alert-danger"
+                                *ngIf="fc['dateOfBirth'].touched && fc['dateOfBirth'].invalid && gstForm.controls['dateOfBirth'].hasError('required')">
+                                Date of Birth is required</div>
+                            <!-- <div class="alert alert-danger"
+                                *ngIf="fc['dateOfBirth'].touched && fc['dateOfBirth'].invalid && gstForm.controls['dateOfBirth'].hasError('ageInvalid')">
+                                </div> -->
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="Aadhar" class="formItemLabelMargin">Aadhar Card Number <span
+                                    class="mandatory">*</span></label>
+                            <input formControlName="aadharCard" type="number" class="form-control" name="" value=""
+                                id="" placeholder="999955551111"
+                                [ngClass]="{'is-invalid': fc['aadharCard'].touched && fc['aadharCard'].invalid}">
+
+                            <div class="alert alert-danger"
+                                *ngIf="fc['aadharCard'].touched && fc['aadharCard'].invalid && gstForm.controls['aadharCard'].hasError('required')">
+                                Aadhar Card Number is required</div>
+                            <div class="alert alert-danger"
+                                *ngIf="fc['aadharCard'].touched && fc['aadharCard'].invalid && gstForm.controls['aadharCard'].hasError('maxlength')">
+                                Please enter valid Aadhar Card Number
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="mobileNo" class="formItemLabelMargin">Mobile Number <span
+                                    class="mandatory">*</span></label>
+                            <input formControlName="mobileNo" type="number" class="form-control" name="" value="" id=""
+                                placeholder="1234567891"
+                                [ngClass]="{'is-invalid': fc['mobileNo'].touched && fc['mobileNo'].invalid}">
+
+                            <div class="alert alert-danger"
+                                *ngIf="fc['mobileNo'].touched && fc['mobileNo'].invalid && gstForm.controls['mobileNo'].hasError('required')">
+                                Mobile Number is required</div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="vleMobile" class="formItemLabelMargin">VLE Mobiles</label>
+                            <input formControlName="vleMobile" type="number" class="form-control" name="" value="" id=""
+                                placeholder="1234567891">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="emailId" class="formItemLabelMargin">Email Id <span
+                                    class="mandatory">*</span></label>
+                            <input formControlName="emailId" type="email" class="form-control" name="" value="" id=""
+                                placeholder="youremail@gmail.com"
+                                [ngClass]="{'is-invalid': fc['emailId'].touched && fc['emailId'].invalid}">
+
+                            <div class="alert alert-danger"
+                                *ngIf="fc['emailId'].touched && fc['emailId'].invalid && gstForm.controls['emailId'].hasError('required')">
+                                Email Id is required</div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="address" class="formItemLabelMargin">Address <span
+                                    class="mandatory">*</span></label>
+                            <input formControlName="address" type="text" class="form-control" name="" value="" id=""
+                                placeholder="Enter Applicant's Resedential Address"
+                                (change)="onFileChoosen($event)"
+                                [ngClass]="{'is-invalid': fc['address'].touched && fc['address'].invalid}">
+
+                            <div class="alert alert-danger"
+                                *ngIf="fc['address'].touched && fc['address'].invalid && gstForm.controls['address'].hasError('required')">
+                                Address is required</div>
+
+                        </div>
+                    </div>
+
+                     <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="" class="formItemLabelMargin"> Passport Size Photo <span
+                                    class="mandatory">*</span></label>
+                            <label class="formItemWarningMargin">&nbsp; (Only JPEG less than 2MB)</label>
+                            <input formControlName="applicantImg" type="file" accept="image/JPEG" name="photo" id=""
+                                class="form-control"
+                                (change)="onFileChoosen($event)"
+                                [ngClass]="{'is-invalid': fc['applicantImg'].touched && fc['applicantImg'].invalid}">
+
+                            <div class="alert alert-danger"
+                                *ngIf="fc['applicantImg'].touched && fc['applicantImg'].invalid && gstForm.controls['applicantImg'].hasError('required')">
+                                this field is required</div>
+                            <div class="alert alert-danger"
+                                *ngIf="fc['applicantImg'].touched && fc['applicantImg'].invalid && gstForm.controls['applicantImg'].hasError('fileTooLarge')">
+                                Image must not exceed 1 MB</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="" class="formItemLabelMargin"> Upload PAN Card </label>
+                            <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
+                            <input formControlName="panCardImg" type="file" accept="image/JPEG" name="pan" id=""
+                                class="form-control"
+                                (change)="onFileChoosen($event)"
+                                [ngClass]="{'is-invalid': fc['panCardImg'].touched && fc['panCardImg'].invalid}">
+                            <div class="alert alert-danger"
+                                *ngIf="fc['panCardImg'].touched && fc['panCardImg'].invalid && gstForm.controls['panCardImg'].hasError('required')">
+                                this field is required</div>
+                            <div class="alert alert-danger"
+                                *ngIf="fc['panCardImg'].touched && fc['panCardImg'].invalid && gstForm.controls['panCardImg'].hasError('fileTooLarge')">
+                                Image must not exceed 1 MB</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="" class="formItemLabelMargin"> Upload Aadhar Card </label>
+                            <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
+                            <input formControlName="aadharCardImg" type="file" accept="image/JPEG*,.pdf" name="aadhar" id=""
+                                class="form-control"
+                                (change)="onFileChoosen($event)"
+                                [ngClass]="{'is-invalid': fc['aadharCardImg'].touched && fc['aadharCardImg'].invalid}">
+                            <div class="alert alert-danger"
+                                *ngIf="fc['aadharCardImg'].touched && fc['aadharCardImg'].invalid && gstForm.controls['aadharCardImg'].hasError('fileTooLarge')">
+                                Image must not exceed 1 MB</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label> Cancelled Cheque or First Page of Passbook </label>
+                            <label class="formItemWarningMargin formItemLabelMargin">&nbsp;( Less than 2MB )</label>
+                            <input formControlName="passbookImg" type="file" accept="image/JPEG*,.pdf" name="passbook" id=""
+                                class="form-control"
+                                (change)="onFileChoosen($event)"
+                                [ngClass]="{'is-invalid': fc['passbookImg'].touched && fc['passbookImg'].invalid}">
+                            <div class="alert alert-danger"
+                                *ngIf="fc['passbookImg'].touched && fc['passbookImg'].invalid && gstForm.controls['passbookImg'].hasError('fileTooLarge')">
+                                Image must not exceed 1 MB</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="" class="formItemLabelMargin"> Upload electricity bill <span
+                                    class="mandatory">*</span> </label>
+                            <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
+                            <input formControlName="electricityBillImg" type="file" accept="image/JPEG" name="electricity" id=""
+                                class="form-control"
+                                (change)="onFileChoosen($event)"
+                                [ngClass]="{'is-invalid': fc['electricityBillImg'].touched && fc['electricityBillImg'].invalid}">
+                            <div class="alert alert-danger"
+                                *ngIf="fc['electricityBillImg'].touched && fc['electricityBillImg'].invalid && gstForm.controls['electricityBillImg'].hasError('required')">
+                                this field is required</div>
+                            <div class="alert alert-danger"
+                                *ngIf="fc['electricityBillImg'].touched && fc['electricityBillImg'].invalid && gstForm.controls['electricityBillImg'].hasError('fileTooLarge')">
+                                Image must not exceed 1 MB</div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-12 text-center">
+                <h3 class="text-theme-primary">Business Details</h3>
+                <p></p>
+            </div>
+        </div>
+        <div class="card shadow-effect">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="businessName" class="formItemLabelMargin">Business Name <span
+                                    class="mandatory">*</span></label>
+                            <input formControlName="businessName" type="text" placeholder="Enter Business Name"
+                                class="form-control" name="" value="" id=""
+                                [ngClass]="{'is-invalid': fc['businessName'].touched && fc['businessName'].invalid}">
+
+                            <div class="alert alert-danger"
+                                *ngIf="fc['businessName'].touched && gstForm.controls['businessName'].hasError('required')">
+                                Applicant's Name is required</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="businessStartDate" class="formItemLabelMargin">Business Commencement Date <span
+                                    class="mandatory">*</span></label>
+                            <input formControlName="businessStartDate" type="date" placeholder="Enter Applicant's Name"
+                                class="form-control" name="" value="" id=""
+                                [ngClass]="{'is-invalid': fc['businessStartDate'].touched && fc['businessStartDate'].invalid}">
+
+                            <div class="alert alert-danger"
+                                *ngIf="fc['businessStartDate'].touched && gstForm.controls['businessStartDate'].hasError('required')">
+                                Applicant's Name is required</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="businessAddress" class="formItemLabelMargin">Business Address <span
+                                    class="mandatory">*</span></label>
+                            <input formControlName="businessAddress" type="text" placeholder="Enter Business Address"
+                                class="form-control" name="" value="" id=""
+                                [ngClass]="{'is-invalid': fc['businessAddress'].touched && fc['businessAddress'].invalid}">
+
+                            <div class="alert alert-danger"
+                                *ngIf="fc['businessAddress'].touched && gstForm.controls['businessAddress'].hasError('required')">
+                                Applicant's Name is required</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="natureOfBusiness" class="formItemLabelMargin">Nature of Business Activities to
+                                be carried <span class="mandatory">*</span></label>
+                            <input formControlName="natureOfBusiness" type="text"
+                                placeholder="Eg:- Jewellery Business, Consultancy Services, Footware, etc"
+                                class="form-control" name="" value="" id=""
+                                [ngClass]="{'is-invalid': fc['natureOfBusiness'].touched && fc['natureOfBusiness'].invalid}">
+
+                            <div class="alert alert-danger"
+                                *ngIf="fc['natureOfBusiness'].touched && gstForm.controls['natureOfBusiness'].hasError('required')">
+                                Applicant's Name is required</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group form-item">
+                            <label for="" class="formItemLabelMargin">Type of Business Property <span
+                                    class="mandatory">*</span></label>
+                            <select formControlName="typeOfBusinessProperty" name="" id="" class="form-control form-select "
+                                [ngClass]="{'is-invalid': fc['typeOfBusinessProperty'].touched && fc['typeOfBusinessProperty'].invalid}">
+                                <option value="LeasedOrRented" selected>Leased / Rented</option>
+                            </select>
+                            <div class="alert alert-danger"
+                                *ngIf="fc['typeOfBusinessProperty'].touched && fc['typeOfBusinessProperty'].invalid && gstForm.controls['typeOfBusinessProperty'].hasError('required')">
+                                this field is requied</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="" class="formItemLabelMargin">Leased / Rented</label>
+                            <select formControlName="leasedOrRented" name="" id="" class="form-control form-select "
+                                [ngClass]="{'is-invalid': fc['leasedOrRented'].touched && fc['leasedOrRented'].invalid}">
+                                <option value="leasedOrRented" selected>Leased / Rented Agreement</option>
+                            </select>
+                            <div class="alert alert-danger"
+                                *ngIf="fc['leasedOrRented'].touched && fc['leasedOrRented'].invalid && gstForm.controls['leasedOrRented'].hasError('required')">
+                                this field is requied</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="" class="formItemLabelMargin"> Leased / Rent Agreement </label>
+                            <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
+                            <input formControlName="leaseOrRentAggrement" type="file" accept="image/JPEG*,.pdf" name="leasedAgreement"
+                                id="" class="form-control"
+                                (change)="onFileChoosen($event)"
+                                [ngClass]="{'is-invalid': fc['leaseOrRentAggrement'].touched && fc['leaseOrRentAggrement'].invalid}">
+                            <div class="alert alert-danger"
+                                *ngIf="fc['leaseOrRentAggrement'].touched && fc['leaseOrRentAggrement'].invalid && gstForm.controls['leaseOrRentAggrement'].hasError('fileTooLarge')">
+                                Image must not exceed 1 MB</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group form-item">
+                            <label class="formItemLabelMargin" for="">Proof of Business</label>
+                            <select formControlName="proofOfBusiness" name="" id="" class="form-control form-select"
+                                [ngClass]="{'is-invalid': fc['proofOfBusiness'].touched && fc['proofOfBusiness'].invalid}">
+                                <option value="proofOfBusiness" selected>Property Tax Receipt</option>
+                            </select>
+                            <div class="alert alert-danger"
+                                *ngIf="fc['proofOfBusiness'].touched && fc['proofOfBusiness'].invalid && gstForm.controls['proofOfBusiness'].hasError('required')">
+                                this field is requied</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group" class="form-item">
+                            <label for="" class="formItemLabelMargin"> Property Tax Receipt </label>
+                            <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
+                            <input formControlName="proofOfBusinessImg" type="file" accept="image/JPEG*,.pdf" name="propertytaxreceipt"
+                                id="" class="form-control"
+                                (change)="onFileChoosen($event)"
+                                [ngClass]="{'is-invalid': fc['proofOfBusinessImg'].touched && fc['proofOfBusinessImg'].invalid}">
+                            <div class="alert alert-danger"
+                                *ngIf="fc['proofOfBusinessImg'].touched && fc['proofOfBusinessImg'].invalid && gstForm.controls['proofOfBusinessImg'].hasError('fileTooLarge')">
+                                Image must not exceed 1 MB</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col-md-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox"  formControlName="isTermsAccepted" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                      I Accept All Terms & Conditions <span class="mandatory">*</span>
+                    </label>
+                  </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success">Submit</button>
+                <button style="margin-left: 10px;" class="btn btn-primary">Reset</button>
+            </div>
+        </div>
+    </form>
+</div>
