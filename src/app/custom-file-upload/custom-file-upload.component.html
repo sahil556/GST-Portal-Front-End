@@ -1,0 +1,36 @@
+<div class="form-group" class="form-item">
+    <label for="" class="formItemLabelMargin"> {{Label}} <span
+            class="mandatory">*</span></label>
+    <label class="formItemWarningMargin">&nbsp; (Only JPEG less than 2MB)</label>
+    <div class="row">
+        <div class="col-md-8">
+            <input type="file" accept="image/JPEG" name="{{fieldName}}"
+                id="" class="form-control" (change)="OnFileChoosen($event)"
+                [ngClass]="{'is-invalid': control?.touched && control?.invalid}">
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-success" name="{{fieldName}}"
+                [disabled]="!selectedFile" (click)="OnUploadImage($event)">
+                Upload
+            </button>
+        </div>
+    </div>
+    <div class="progress my-3">
+        <div
+          class="progress-bar progress-bar-info"
+          role="progressbar"
+          attr.aria-valuenow="{{ fileUploadProgress }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          [ngStyle]="{ width: fileUploadProgress + '%' }"
+        >
+          {{ fileUploadProgress }}%
+        </div>
+      </div>
+    <div class="alert alert-danger"
+        *ngIf="control?.touched && control?.invalid && control?.hasError('required')">
+        this field is required</div>
+    <div class="alert alert-danger"
+        *ngIf="control?.touched && control?.invalid && control?.hasError('fileTooLarge')">
+        Image must not exceed 1 MB</div>
+</div>

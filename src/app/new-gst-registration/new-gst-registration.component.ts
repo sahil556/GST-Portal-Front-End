@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RegisterGstService } from '../services/register-gst.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GstForm } from '../models/gst-form';
+import { finalize, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-gst-registration',
@@ -10,7 +11,10 @@ import { GstForm } from '../models/gst-form';
 })
 export class NewGstRegistrationComponent {
   gstForm: FormGroup = new FormGroup({});
-  selectedUserImage: any;
+  selectedUserImage?: File;
+  selectedUserImageUrl: string = "";
+  downLoadURL$: Observable<string> | undefined
+
   selectedPanImage: any;
   selectedAadharImage: any;
   selectedPassbookImage: any;
@@ -53,6 +57,7 @@ export class NewGstRegistrationComponent {
   }
 
   onSubmit() {
+    console.log("on submit is called");
     const formData: GstForm = {
       applicantName: this.gstForm.value.title,
       fatherName: this.gstForm.value.fatherName,
@@ -63,7 +68,7 @@ export class NewGstRegistrationComponent {
       vleMobileNumber: this.gstForm.value.vleMobile,
       emailId: this.gstForm.value.emailId,
       address: this.gstForm.value.address,
-      userImgUrl: this.gstForm.value.applicantImg,
+      userImgUrl: this.selectedUserImageUrl,
       panCardUrl: this.gstForm.value.panCardImg,
       aadharCardUrl: this.gstForm.value.aadharCardImg,
       passbookPageUrl: this.gstForm.value.passbookImg,
@@ -90,11 +95,11 @@ export class NewGstRegistrationComponent {
       this.selectedleasedOrRentedImage,
       formData
     )
-    console.log(formData)
   }
 
   onFileChoosen($event: { target: any}): void {
     {
+      let button  = ($event.target as HTMLButtonElement)
       //pan. aadhar, electricity, passbook, photo 
       // propertytaxreceipt, leasedAgreement
       console.log($event.target)
@@ -128,4 +133,45 @@ export class NewGstRegistrationComponent {
       }
     }
   }
+
+  uploadImage($event: Event)
+  {
+    let button  = ($event.target as HTMLButtonElement)
+    button.innerHTML = "Uploading...";
+    
+    let node = button.name
+    // setTimeout(() => {
+    //   node.innerHTML = "Uploaded"
+    //   node.className = "btn btn-primary";
+    // }, 2000);
+
+    switch (node)
+    {
+      case 'userImg':
+        this.uploadImageAndSetURL(this.selectedUserImage, Date.now().toString(), button, "applicantImg")
+        break;
+      // other cases
+      default:
+        console.log("went wrong")
+    }
+  }
+
+  uploadImageAndSetURL(image: File | undefined, filepath: string, button: HTMLButtonElement, key: string)
+  {
+    this.registerService.uploadImage(this.selectedUserImage, filepath).subscribe({
+        complete: () =>{
+        button.innerHTML = "Uploaded"
+        button.className = "btn btn-primary";
+        this.registerService.getDownloadURL(filepath).subscribe(url =>{
+          if(this.gstForm.contains(key))
+          {
+            this.selectedUserImageUrl = url;
+          }
+        })
+      }, 
+    })
+  }
+
+
 }
+
