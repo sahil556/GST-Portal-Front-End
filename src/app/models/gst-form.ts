@@ -25,4 +25,5 @@ export interface GstForm {
     proofOfBusinessUrl: string;
     isTermsAccepted: boolean;
     isProduction: boolean;
+    createdAt: Date
 }
