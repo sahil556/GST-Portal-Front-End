@@ -13,15 +13,31 @@ export class NewGstRegistrationComponent {
   gstForm: FormGroup = new FormGroup({});
   selectedUserImage?: File;
   selectedUserImageUrl: string = "";
-  downLoadURL$: Observable<string> | undefined
+  userImageUploadStatus: string = "Uploading...";
 
-  selectedPanImage: any;
-  selectedAadharImage: any;
-  selectedPassbookImage: any;
-  selectedElectricityImage: any;
-  selectedleasedOrRentedImage: any;
-  selectedProofOfBusinessImage: any;
+  selectedPanImage?: File;
+  selectedPanImageUrl: string = "";
+  panImageUploadStatus: string = "Uploading...";
 
+  selectedAadharImage?: File;
+  selectedAadharImageUrl: string = "";
+  aadharImageUploadStatus: string = "Uploading...";
+
+  selectedPassbookImage?: File;
+  selectedPassbookImageUrl: string = "";
+  passbookImageUploadStatus: string = "Uploading...";
+
+  selectedElectricityImage? : File;
+  selectedElectricityImageUrl: string = "";
+  electricityImageUploadStatus: string = "Uploading...";
+
+  selectedleasedOrRentedImage?:File;
+  selectedleasedOrRentedImageUrl: string = "";
+  leasedOrRentedImageUploadStatus: string = "Uploading...";
+
+  selectedProofOfBusinessImage?: File;
+  selectedProofOfBusinessImageUrl: string = "";
+  proofOfBusinessImageUploadStatus: string = "Uploading...";
 
   constructor(private formBuilder: FormBuilder, private registerService: RegisterGstService) {
     this.gstForm = this.formBuilder.group({
@@ -69,10 +85,10 @@ export class NewGstRegistrationComponent {
       emailId: this.gstForm.value.emailId,
       address: this.gstForm.value.address,
       userImgUrl: this.selectedUserImageUrl,
-      panCardUrl: this.gstForm.value.panCardImg,
-      aadharCardUrl: this.gstForm.value.aadharCardImg,
-      passbookPageUrl: this.gstForm.value.passbookImg,
-      electricityBillUrl: this.gstForm.value.electricityBillImg,
+      panCardUrl: this.selectedPanImageUrl,
+      aadharCardUrl: this.selectedAadharImageUrl,
+      passbookPageUrl: this.selectedPassbookImageUrl,
+      electricityBillUrl: this.selectedElectricityImageUrl,
       businessName: this.gstForm.value.businessName,
       businessStartDate: this.gstForm.value.businessStartDate,
       businessAddress: this.gstForm.value.businessAddress,
@@ -80,21 +96,13 @@ export class NewGstRegistrationComponent {
       typeOfBusiness: this.gstForm.value.typeOfBusinessProperty,
       LeasedOrRented: this.gstForm.value.leasedOrRented,
       proofOfBusiness: this.gstForm.value.proofOfBusiness,
-      leasedOrRentedAggrementUrl: this.gstForm.value.leaseOrRentAggrement,
-      proofOfBusinessUrl: this.gstForm.value.proofOfBusinessImg,
-      isTermsAccepted: this.gstForm.value.isTermsAccepted
+      leasedOrRentedAggrementUrl: this.selectedleasedOrRentedImageUrl,
+      proofOfBusinessUrl: this.selectedProofOfBusinessImageUrl,
+      isTermsAccepted: this.gstForm.value.isTermsAccepted,
+      isProduction : false
     }
 
-    this.registerService.saveData(
-      this.selectedUserImage,
-      this.selectedAadharImage, 
-      this.selectedPanImage,
-      this.selectedPassbookImage,
-      this.selectedElectricityImage,
-      this.selectedProofOfBusinessImage,
-      this.selectedleasedOrRentedImage,
-      formData
-    )
+    this.registerService.saveData(formData)
   }
 
   onFileChoosen($event: { target: any}): void {
@@ -131,47 +139,91 @@ export class NewGstRegistrationComponent {
         default:
           console.log("image event failed");
       }
+      // const reader = new FileReader();
+      // reader.onload= (e :any) =>{
+      //     this.imgSrc = e.target.result;
+      // }
+      // reader.readAsDataURL($event?.target.files[0]);
+      this.uploadImage(node)
     }
   }
 
-  uploadImage($event: Event)
+  uploadImage(node: string)
   {
-    let button  = ($event.target as HTMLButtonElement)
-    button.innerHTML = "Uploading...";
-    
-    let node = button.name
     // setTimeout(() => {
     //   node.innerHTML = "Uploaded"
     //   node.className = "btn btn-primary";
     // }, 2000);
-
+    let filename = this.gstForm.value.panNumber + Date.now().toString();
     switch (node)
     {
-      case 'userImg':
-        this.uploadImageAndSetURL(this.selectedUserImage, Date.now().toString(), button, "applicantImg")
+      case 'photo':
+        this.uploadImageAndSetURL(this.selectedUserImage, filename, node)
         break;
-      // other cases
+      case 'pan':
+        this.uploadImageAndSetURL(this.selectedPanImage, filename,node)
+        break;
+      case 'aadhar':
+        this.uploadImageAndSetURL(this.selectedAadharImage, filename,node)
+        break;
+      case 'electricity':
+        this.uploadImageAndSetURL(this.selectedElectricityImage, filename,node)
+        break;
+      case 'passbook':
+        this.uploadImageAndSetURL(this.selectedPassbookImage, filename,node)
+        break;
+      case 'propertytaxreceipt':
+        this.uploadImageAndSetURL(this.selectedProofOfBusinessImage, filename,node)
+        break;
+      case 'leasedAgreement':
+        this.uploadImageAndSetURL(this.selectedleasedOrRentedImage, filename,node)
+        break;      
+     
       default:
         console.log("went wrong")
     }
   }
 
-  uploadImageAndSetURL(image: File | undefined, filepath: string, button: HTMLButtonElement, key: string)
+  uploadImageAndSetURL(image: File | undefined, filepath: string, key: string)
   {
-    this.registerService.uploadImage(this.selectedUserImage, filepath).subscribe({
+    this.registerService.uploadImage(image, filepath).subscribe({
         complete: () =>{
-        button.innerHTML = "Uploaded"
-        button.className = "btn btn-primary";
         this.registerService.getDownloadURL(filepath).subscribe(url =>{
-          if(this.gstForm.contains(key))
+          switch(key)
           {
-            this.selectedUserImageUrl = url;
+              case 'photo':
+                this.selectedUserImageUrl = url;
+                this.userImageUploadStatus = "Uploaded"
+                break;
+              case 'pan':
+                this.selectedPanImageUrl = url;
+                this.panImageUploadStatus = "Uploaded"
+                break;
+              case 'aadhar':
+                this.selectedAadharImageUrl = url;
+                this.aadharImageUploadStatus = "Uploaded"
+                break;
+              case 'electricity':
+                this.selectedElectricityImageUrl = url;
+                this.electricityImageUploadStatus = "Uploaded"
+                break;
+              case 'passbook':
+                this.selectedPassbookImageUrl = url;
+                this.passbookImageUploadStatus = "Uploaded"
+                break;
+              case 'propertytaxreceipt':
+                this.selectedProofOfBusinessImageUrl = url;
+                this.proofOfBusinessImageUploadStatus = "Uploaded"
+                break;
+              case 'leasedAgreement':
+                this.selectedleasedOrRentedImageUrl = url;
+                this.leasedOrRentedImageUploadStatus = "Uploaded"
+                break;    
           }
         })
       }, 
     })
   }
-
 
 }
 

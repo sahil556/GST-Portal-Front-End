@@ -24,4 +24,5 @@ export interface GstForm {
     leasedOrRentedAggrementUrl: string;
     proofOfBusinessUrl: string;
     isTermsAccepted: boolean;
+    isProduction: boolean;
 }
