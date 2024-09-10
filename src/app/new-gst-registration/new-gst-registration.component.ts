@@ -11,24 +11,31 @@ import { finalize, Observable } from 'rxjs';
 })
 export class NewGstRegistrationComponent {
   gstForm: FormGroup = new FormGroup({});
+  selectedUserImage?: File;
   selectedUserImageUrl: string = "";
   userImageUploadStatus: string = "Uploading...";
 
+  selectedPanImage?: File;
   selectedPanImageUrl: string = "";
   panImageUploadStatus: string = "Uploading...";
 
+  selectedAadharImage?: File;
   selectedAadharImageUrl: string = "";
   aadharImageUploadStatus: string = "Uploading...";
 
+  selectedPassbookImage?: File;
   selectedPassbookImageUrl: string = "";
   passbookImageUploadStatus: string = "Uploading...";
 
+  selectedElectricityImage? : File;
   selectedElectricityImageUrl: string = "";
   electricityImageUploadStatus: string = "Uploading...";
 
+  selectedleasedOrRentedImage?:File;
   selectedleasedOrRentedImageUrl: string = "";
   leasedOrRentedImageUploadStatus: string = "Uploading...";
 
+  selectedProofOfBusinessImage?: File;
   selectedProofOfBusinessImageUrl: string = "";
   proofOfBusinessImageUploadStatus: string = "Uploading...";
 
@@ -92,8 +99,7 @@ export class NewGstRegistrationComponent {
       leasedOrRentedAggrementUrl: this.selectedleasedOrRentedImageUrl,
       proofOfBusinessUrl: this.selectedProofOfBusinessImageUrl,
       isTermsAccepted: this.gstForm.value.isTermsAccepted,
-      isProduction : false,
-      createdAt: new Date()
+      isProduction : false
     }
 
     this.registerService.saveData(formData)
@@ -107,16 +113,74 @@ export class NewGstRegistrationComponent {
       console.log($event.target)
       let node  = ($event.target as HTMLInputElement).name;
       console.log(node)
-      
+      switch (node)
+      {
+        case 'photo':
+          this.selectedUserImage = $event.target.files[0]
+          break;
+        case 'pan':
+          this.selectedPanImage =  $event.target.files[0]
+          break;
+        case 'aadhar':
+          this.selectedAadharImage = $event.target.files[0]
+          break;
+        case 'electricity':
+          this.selectedElectricityImage = $event.target.files[0]
+          break;
+        case 'passbook':
+          this.selectedPassbookImage = $event.target.files[0]
+          break;
+        case 'propertytaxreceipt':
+          this.selectedProofOfBusinessImage = $event.target.files[0]
+          break;
+        case 'leasedAgreement':
+          this.selectedleasedOrRentedImage = $event.target.files[0]
+          break;
+        default:
+          console.log("image event failed");
+      }
       // const reader = new FileReader();
       // reader.onload= (e :any) =>{
       //     this.imgSrc = e.target.result;
       // }
       // reader.readAsDataURL($event?.target.files[0]);
-      if($event.target.files[0] != undefined && node != "")
-      {
-        this.uploadImageAndSetURL($event.target.files[0], node +"/"+  this.gstForm.value.panNumber + Date.now().toString() , node)
-      }
+      this.uploadImage(node)
+    }
+  }
+
+  uploadImage(node: string)
+  {
+    // setTimeout(() => {
+    //   node.innerHTML = "Uploaded"
+    //   node.className = "btn btn-primary";
+    // }, 2000);
+    let filename = this.gstForm.value.panNumber + Date.now().toString();
+    switch (node)
+    {
+      case 'photo':
+        this.uploadImageAndSetURL(this.selectedUserImage, filename, node)
+        break;
+      case 'pan':
+        this.uploadImageAndSetURL(this.selectedPanImage, filename,node)
+        break;
+      case 'aadhar':
+        this.uploadImageAndSetURL(this.selectedAadharImage, filename,node)
+        break;
+      case 'electricity':
+        this.uploadImageAndSetURL(this.selectedElectricityImage, filename,node)
+        break;
+      case 'passbook':
+        this.uploadImageAndSetURL(this.selectedPassbookImage, filename,node)
+        break;
+      case 'propertytaxreceipt':
+        this.uploadImageAndSetURL(this.selectedProofOfBusinessImage, filename,node)
+        break;
+      case 'leasedAgreement':
+        this.uploadImageAndSetURL(this.selectedleasedOrRentedImage, filename,node)
+        break;      
+     
+      default:
+        console.log("went wrong")
     }
   }
 
@@ -155,8 +219,6 @@ export class NewGstRegistrationComponent {
                 this.selectedleasedOrRentedImageUrl = url;
                 this.leasedOrRentedImageUploadStatus = "Uploaded"
                 break;    
-              default:
-                console.log("no node matched")
           }
         })
       }, 
