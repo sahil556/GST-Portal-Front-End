@@ -53,8 +53,8 @@ export class NewGstRegistrationComponent {
       businessAddress: ["sa", [Validators.required]],
       natureOfBusiness: ["sa", [Validators.required]],
       typeOfBusinessProperty: ["LeasedOrRented", [Validators.required]],
-      leasedOrRented: [""],
-      proofOfBusiness: [""],
+      leasedOrRented: ["leasedOrRented"],
+      proofOfBusiness: ["proofOfBusiness"],
       leaseOrRentAggrement: [""],
       proofOfBusinessImg: [""],
       isTermsAccepted: [true, [Validators.required, Validators.requiredTrue]],
@@ -96,6 +96,11 @@ export class NewGstRegistrationComponent {
     }
 
     this.registerService.saveData(formData)
+    this.gstForm.reset()
+  }
+
+  resetForm(){
+    this.gstForm.reset()
   }
 
   onFileChoosen($event: { target: any}): void {

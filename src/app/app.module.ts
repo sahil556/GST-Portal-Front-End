@@ -10,12 +10,16 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { NewGstRegistrationComponent } from './new-gst-registration/new-gst-registration.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomFileUploadComponent } from './custom-file-upload/custom-file-upload.component';
+import { HeaderComponent } from './layouts/header/header.component';
+import { FooterComponent } from './layouts/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewGstRegistrationComponent,
-    CustomFileUploadComponent
+    CustomFileUploadComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
