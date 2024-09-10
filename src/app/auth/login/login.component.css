@@ -1,0 +1,9 @@
+a {
+    text-decoration: none;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.card {
+    background-color: var(--login-theme-background-color)
+}
