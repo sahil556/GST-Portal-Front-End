@@ -157,7 +157,7 @@
                                     class="mandatory">*</span></label>
                             <label class="formItemWarningMargin">&nbsp; (Only JPEG less than 2MB)</label>
                             &nbsp;
-                            <span *ngIf="selectedUserImage" class="badge rounded-pill bg-info text-dark">{{userImageUploadStatus}}</span>
+                            <span *ngIf="userImageUploadStatus" class="badge rounded-pill bg-info text-dark">{{userImageUploadStatus}}</span>
                             
                             <input formControlName="applicantImg" type="file" accept="image/*" name="photo"
                                 id="" class="form-control" (change)="onFileChoosen($event)"
@@ -175,7 +175,7 @@
                         <div class="form-group" class="form-item">
                             <label for="" class="formItemLabelMargin"> Upload PAN Card </label>
                             <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
-                            <span *ngIf="selectedPanImage" class="badge rounded-pill bg-info text-dark">{{panImageUploadStatus}}</span>
+                            <span *ngIf="panImageUploadStatus" class="badge rounded-pill bg-info text-dark">{{panImageUploadStatus}}</span>
                             <input formControlName="panCardImg" type="file" accept="image/JPEG" name="pan" id=""
                                 class="form-control" (change)="onFileChoosen($event)"
                                 [ngClass]="{'is-invalid': fc['panCardImg'].touched && fc['panCardImg'].invalid}">
@@ -192,7 +192,7 @@
                         <div class="form-group" class="form-item">
                             <label for="" class="formItemLabelMargin"> Upload Aadhar Card </label>
                             <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
-                            <span *ngIf="selectedAadharImage" class="badge rounded-pill bg-info text-dark">{{aadharImageUploadStatus}}</span>
+                            <span *ngIf="aadharImageUploadStatus" class="badge rounded-pill bg-info text-dark">{{aadharImageUploadStatus}}</span>
                             <input formControlName="aadharCardImg" type="file" accept="image/JPEG*,.pdf" name="aadhar"
                                 id="" class="form-control" (change)="onFileChoosen($event)"
                                 [ngClass]="{'is-invalid': fc['aadharCardImg'].touched && fc['aadharCardImg'].invalid}">
@@ -206,7 +206,7 @@
                         <div class="form-group" class="form-item">
                             <label> Cancelled Cheque or First Page of Passbook </label>
                             <label class="formItemWarningMargin formItemLabelMargin">&nbsp;( Less than 2MB )</label>
-                            <span *ngIf="selectedPassbookImage" class="badge rounded-pill bg-info text-dark">{{passbookImageUploadStatus}}</span>
+                            <span *ngIf="passbookImageUploadStatus" class="badge rounded-pill bg-info text-dark">{{passbookImageUploadStatus}}</span>
                             <input formControlName="passbookImg" type="file" accept="image/JPEG*,.pdf" name="passbook"
                                 id="" class="form-control" (change)="onFileChoosen($event)"
                                 [ngClass]="{'is-invalid': fc['passbookImg'].touched && fc['passbookImg'].invalid}">
@@ -221,7 +221,7 @@
                             <label for="" class="formItemLabelMargin"> Upload electricity bill <span
                                     class="mandatory">*</span> </label>
                             <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
-                            <span *ngIf="selectedElectricityImage" class="badge rounded-pill bg-info text-dark">{{electricityImageUploadStatus}}</span>
+                            <span *ngIf="electricityImageUploadStatus" class="badge rounded-pill bg-info text-dark">{{electricityImageUploadStatus}}</span>
                             <input formControlName="electricityBillImg" type="file" accept="image/JPEG"
                                 name="electricity" id="" class="form-control" (change)="onFileChoosen($event)"
                                 [ngClass]="{'is-invalid': fc['electricityBillImg'].touched && fc['electricityBillImg'].invalid}">
@@ -335,7 +335,7 @@
                         <div class="form-group" class="form-item">
                             <label for="" class="formItemLabelMargin"> Leased / Rent Agreement </label>
                             <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
-                            <span *ngIf="selectedleasedOrRentedImage" class="badge rounded-pill bg-info text-dark">{{leasedOrRentedImageUploadStatus}}</span>
+                            <span *ngIf="leasedOrRentedImageUploadStatus" class="badge rounded-pill bg-info text-dark">{{leasedOrRentedImageUploadStatus}}</span>
                             <input formControlName="leaseOrRentAggrement" type="file" accept="image/JPEG*,.pdf"
                                 name="leasedAgreement" id="" class="form-control" (change)="onFileChoosen($event)"
                                 [ngClass]="{'is-invalid': fc['leaseOrRentAggrement'].touched && fc['leaseOrRentAggrement'].invalid}">
@@ -362,7 +362,7 @@
                         <div class="form-group" class="form-item">
                             <label for="" class="formItemLabelMargin"> Property Tax Receipt </label>
                             <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
-                            <span *ngIf="selectedProofOfBusinessImage" class="badge rounded-pill bg-info text-dark">{{proofOfBusinessImageUploadStatus}}</span>
+                            <span *ngIf="proofOfBusinessImageUploadStatus" class="badge rounded-pill bg-info text-dark">{{proofOfBusinessImageUploadStatus}}</span>
                             <input formControlName="proofOfBusinessImg" type="file" accept="image/JPEG*,.pdf"
                                 name="propertytaxreceipt" id="" class="form-control" (change)="onFileChoosen($event)"
                                 [ngClass]="{'is-invalid': fc['proofOfBusinessImg'].touched && fc['proofOfBusinessImg'].invalid}">

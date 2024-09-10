@@ -11,33 +11,26 @@ import { finalize, Observable } from 'rxjs';
 })
 export class NewGstRegistrationComponent {
   gstForm: FormGroup = new FormGroup({});
-  selectedUserImage?: File;
   selectedUserImageUrl: string = "";
-  userImageUploadStatus: string = "Uploading...";
+  userImageUploadStatus: string = "";
 
-  selectedPanImage?: File;
   selectedPanImageUrl: string = "";
-  panImageUploadStatus: string = "Uploading...";
+  panImageUploadStatus: string = "";
 
-  selectedAadharImage?: File;
   selectedAadharImageUrl: string = "";
-  aadharImageUploadStatus: string = "Uploading...";
+  aadharImageUploadStatus: string = "";
 
-  selectedPassbookImage?: File;
   selectedPassbookImageUrl: string = "";
-  passbookImageUploadStatus: string = "Uploading...";
+  passbookImageUploadStatus: string = "";
 
-  selectedElectricityImage? : File;
   selectedElectricityImageUrl: string = "";
-  electricityImageUploadStatus: string = "Uploading...";
+  electricityImageUploadStatus: string = "";
 
-  selectedleasedOrRentedImage?:File;
   selectedleasedOrRentedImageUrl: string = "";
-  leasedOrRentedImageUploadStatus: string = "Uploading...";
+  leasedOrRentedImageUploadStatus: string = "";
 
-  selectedProofOfBusinessImage?: File;
   selectedProofOfBusinessImageUrl: string = "";
-  proofOfBusinessImageUploadStatus: string = "Uploading...";
+  proofOfBusinessImageUploadStatus: string = "";
 
   constructor(private formBuilder: FormBuilder, private registerService: RegisterGstService) {
     this.gstForm = this.formBuilder.group({
@@ -116,25 +109,25 @@ export class NewGstRegistrationComponent {
       switch (node)
       {
         case 'photo':
-          this.selectedUserImage = $event.target.files[0]
+          this.userImageUploadStatus = "Uploading..."
           break;
         case 'pan':
-          this.selectedPanImage =  $event.target.files[0]
+          this.panImageUploadStatus = "Uploading..."
           break;
         case 'aadhar':
-          this.selectedAadharImage = $event.target.files[0]
+          this.aadharImageUploadStatus = "Uploading..."
           break;
         case 'electricity':
-          this.selectedElectricityImage = $event.target.files[0]
+          this.electricityImageUploadStatus = "Uploading..."
           break;
         case 'passbook':
-          this.selectedPassbookImage = $event.target.files[0]
+          this.passbookImageUploadStatus = "Uploading..."
           break;
         case 'propertytaxreceipt':
-          this.selectedProofOfBusinessImage = $event.target.files[0]
+          this.proofOfBusinessImageUploadStatus = "Uploading..."
           break;
         case 'leasedAgreement':
-          this.selectedleasedOrRentedImage = $event.target.files[0]
+          this.leasedOrRentedImageUploadStatus = "Uploading..."
           break;
         default:
           console.log("image event failed");
@@ -144,43 +137,7 @@ export class NewGstRegistrationComponent {
       //     this.imgSrc = e.target.result;
       // }
       // reader.readAsDataURL($event?.target.files[0]);
-      this.uploadImage(node)
-    }
-  }
-
-  uploadImage(node: string)
-  {
-    // setTimeout(() => {
-    //   node.innerHTML = "Uploaded"
-    //   node.className = "btn btn-primary";
-    // }, 2000);
-    let filename = this.gstForm.value.panNumber + Date.now().toString();
-    switch (node)
-    {
-      case 'photo':
-        this.uploadImageAndSetURL(this.selectedUserImage, filename, node)
-        break;
-      case 'pan':
-        this.uploadImageAndSetURL(this.selectedPanImage, filename,node)
-        break;
-      case 'aadhar':
-        this.uploadImageAndSetURL(this.selectedAadharImage, filename,node)
-        break;
-      case 'electricity':
-        this.uploadImageAndSetURL(this.selectedElectricityImage, filename,node)
-        break;
-      case 'passbook':
-        this.uploadImageAndSetURL(this.selectedPassbookImage, filename,node)
-        break;
-      case 'propertytaxreceipt':
-        this.uploadImageAndSetURL(this.selectedProofOfBusinessImage, filename,node)
-        break;
-      case 'leasedAgreement':
-        this.uploadImageAndSetURL(this.selectedleasedOrRentedImage, filename,node)
-        break;      
-     
-      default:
-        console.log("went wrong")
+      this.uploadImageAndSetURL($event.target.files[0], node +"/"+  this.gstForm.value.panNumber + Date.now().toString() , node)
     }
   }
 
