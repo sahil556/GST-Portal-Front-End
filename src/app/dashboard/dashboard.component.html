@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <div class="row"></div>
+    <div class="col-md-12">
+        <div class="card shadow-effect bg-theme-secondary">
+            <div class="card-body text-center">
+                <h3 class="text-theme-center">All GST Application</h3>
+                <p>here you can see all the application</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row my-3">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+            <div class="table-container mx-3">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Name</th>
+                            <th>Father Name</th>
+                            <th>PAN Number</th>
+                            <th>DOB</th>
+                            <th>Aadhar Number</th>
+                            <th>Mobile Number</th>
+                            
+                            
+                            <th>Business Name</th>
+                            <th>Start Date</th>
+                            
+                            
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="gstDataArray.length; else norecord">
+                        <tr *ngFor="let userData of gstDataArray; index as i">
+                            <td class="text-center">{{i+1}}</td>
+                            <td>{{userData.data.applicantName | titlecase}}</td>
+                            <td>{{userData.data.fatherName | titlecase}}</td>
+                            <td>{{userData.data.panNumber}}</td>
+                            <td>{{userData.data.dateOfBirth | date: "dd-MM-yyyy"}}</td>
+                            <td>{{userData.data.aadharCardNumber}}</td>
+                            <td>{{userData.data.mobileNumber}}</td>
+                            
+                            <td>{{userData.data.businessName | titlecase}}</td>
+                            <td>{{userData.data.businessStartDate | date: "dd-MM-yyyy"}}</td>
+                            <td>
+                               <button type="button" (click)="openDialog(userData.data)" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Show Details</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
+
+<ng-template #norecord>
+    <p>No Application Found</p>
+</ng-template>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <img width="85px" height="85px" src="{{popupModal?.userImgUrl}}" alt="User Image"/>
+          <h1 style="margin-left: 20px;" class="modal-title fs-5 text-center" id="exampleModalLabel">{{popupModal?.applicantName | titlecase}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                  <p><strong>Father Name :</strong> {{ popupModal?.fatherName | titlecase}}</p>
+                  <p><strong>Email :</strong> {{ popupModal?.emailId }}</p>
+                  <p><strong>Mobile Number :</strong> {{ popupModal?.mobileNumber }}</p>
+                  <p><strong>VLE Mobile :</strong> {{ popupModal?.mobileNumber }}</p>
+                  <p><strong>Address :</strong> {{ popupModal?.address | titlecase }}</p>
+                  <p><strong>PAN :</strong> {{ popupModal?.panNumber }}</p>
+                  <p><strong>Aadhar Card :</strong> {{ popupModal?.aadharCardNumber }}</p>
+                  <p><strong>Date of Birth :</strong> {{ popupModal?.dateOfBirth | date: "dd MMMM, yyyy"}}</p>
+                  <p><strong>Business Name :</strong> {{ popupModal?.businessName }}</p>
+                  <p><strong>Business Start Date :</strong> {{ popupModal?.businessStartDate | date: "dd MMMM, yyyy"}}</p>
+                  <p><strong>Business Address :</strong> {{ popupModal?.businessAddress | titlecase }}</p>
+                  <p><strong>Nature Of Business :</strong> {{ popupModal?.natureOfBusiness | titlecase }}</p>
+                  <p><strong>Type Of Business :</strong> {{ popupModal?.typeOfBusiness }}</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                <button class="btn btn-secondary image-link-btn" *ngIf="popupModal?.panCardUrl"><a href="{{popupModal?.panCardUrl}}" target="_blank">Pan Card</a></button>
+                <button class="btn btn-secondary image-link-btn" *ngIf="popupModal?.aadharCardUrl"><a href="{{popupModal?.aadharCardUrl}}" target="_blank">Aadhar Card</a></button>
+                <button class="btn btn-secondary image-link-btn" *ngIf="popupModal?.passbookPageUrl"><a href="{{popupModal?.passbookPageUrl}}" target="_blank">Bank Details</a></button>
+                <button class="btn btn-secondary image-link-btn" *ngIf="popupModal?.electricityBillUrl"><a href="{{popupModal?.electricityBillUrl}}" target="_blank">Electricity Bill</a></button>
+                <button class="btn btn-secondary image-link-btn" *ngIf="popupModal?.proofOfBusinessUrl"><a href="{{popupModal?.proofOfBusinessUrl}}" target="_blank">Proof Of Business</a></button>
+                <button class="btn btn-secondary image-link-btn" *ngIf="popupModal?.leasedOrRentedAggrementUrl"><a href="{{popupModal?.leasedOrRentedAggrementUrl}}" target="_blank">Leased / Rented Proof</a></button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

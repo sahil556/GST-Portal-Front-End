@@ -34,4 +34,27 @@ export class AuthService {
       localStorage.setItem('user', JSON.stringify(user));
     })
   }
+
+  isLoggedin()
+  {
+    console.log(JSON.parse(localStorage.getItem('user') || '{}').email)
+    if(JSON.parse(localStorage.getItem('user') || '{}').email != undefined)
+    {
+      this.loggedIn.next(true);
+      this.isLoggedinguard = true;
+    }
+    return this.loggedIn.asObservable();
+  }
+
+  logout()
+  {
+    this.afauth.signOut().then(()=>{
+      this.loggedIn.next(false);
+      localStorage.removeItem('user');
+      this.isLoggedinguard = false;
+      // this.toastr.success("Logged Out Successfully")
+      this.router.navigate(['/login'])
+    })
+  }
+
 }

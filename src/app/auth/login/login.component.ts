@@ -12,11 +12,11 @@ export class LoginComponent {
   
   async onSubmit(formValue:any):Promise<void>{
     this.ShouldShowLoader = true;
-    // this.authservice.login(formValue.email, formValue.password).then(()=>{
-    // })
-    // .catch(err =>{
-    //   this.ShouldShowLoader = false;
-    // });
+    this.authservice.login(formValue.email, formValue.password).then(()=>{
+    })
+    .catch(err =>{
+      this.ShouldShowLoader = false;
+    });
     
   }
 }

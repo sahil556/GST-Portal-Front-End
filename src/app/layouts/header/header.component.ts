@@ -14,7 +14,7 @@ export class HeaderComponent {
   constructor(private authservice: AuthService) {
   }
   ngOnInit() {
-    // this.isLoggedin$ = this.authservice.isLoggedin();
+    this.isLoggedin$ = this.authservice.isLoggedin();
   }
 
   shoulddisplay() {

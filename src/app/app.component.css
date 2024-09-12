@@ -1,0 +1,5 @@
+.app-body {
+    min-height: 65%;
+    height: auto !important;
+ /* the bottom margin is the negative value of the footer's total height */
+}

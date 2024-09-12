@@ -13,6 +13,10 @@ import { CustomFileUploadComponent } from './custom-file-upload/custom-file-uplo
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { LoginComponent } from './auth/login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -21,19 +25,23 @@ import { LoginComponent } from './auth/login/login.component';
     CustomFileUploadComponent,
     HeaderComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    BrowserAnimationsModule,
   ],
   providers: [
     provideFirebaseApp(() => initializeApp({"projectId":"gst-data-collector","appId":"1:68683473962:web:a16b68cf28fdd320620f53","storageBucket":"gst-data-collector.appspot.com","apiKey":"AIzaSyBNWRaeZFigfry_-IzWXlwa1sWGTk6dQiA","authDomain":"gst-data-collector.firebaseapp.com","messagingSenderId":"68683473962","measurementId":"G-Q9BJRH49HM"})),
     provideAuth(() => getAuth()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
