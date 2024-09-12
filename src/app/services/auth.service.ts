@@ -38,8 +38,8 @@ export class AuthService {
 
   isLoggedin()
   {
-    console.log(JSON.parse(localStorage.getItem('user') || '{}').email)
-    if(JSON.parse(localStorage.getItem('user') || '{}').email != undefined)
+    console.log(JSON.parse(localStorage.getItem('user') || '{}')?.email)
+    if(JSON.parse(localStorage.getItem('user') || '{}')?.email != undefined)
     {
       this.loggedIn.next(true);
       this.isLoggedinguard = true;
@@ -56,6 +56,12 @@ export class AuthService {
       this.toastr.success("Logged Out Successfully")
       this.router.navigate(['/login'])
     })
+  }
+
+  resetPassword(email : string)
+  {
+    let responce = this.afauth.sendPasswordResetEmail(email )
+    return responce;
   }
 
 }
