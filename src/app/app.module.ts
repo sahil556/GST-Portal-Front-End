@@ -16,7 +16,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { ModalComponent } from './modal/modal.component';
+import { LoaderComponent } from './layouts/loader/loader.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { ModalComponent } from './modal/modal.component';
     FooterComponent,
     LoginComponent,
     DashboardComponent,
-    ModalComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +37,7 @@ import { ModalComponent } from './modal/modal.component';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     provideFirebaseApp(() => initializeApp({"projectId":"gst-data-collector","appId":"1:68683473962:web:a16b68cf28fdd320620f53","storageBucket":"gst-data-collector.appspot.com","apiKey":"AIzaSyBNWRaeZFigfry_-IzWXlwa1sWGTk6dQiA","authDomain":"gst-data-collector.firebaseapp.com","messagingSenderId":"68683473962","measurementId":"G-Q9BJRH49HM"})),
