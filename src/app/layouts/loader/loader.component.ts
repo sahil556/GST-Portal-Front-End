@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './loader.component.css'
 })
 export class LoaderComponent {
-  imgSrc: any = "./assets/Loaderimage.gif";
+  imgSrc: any = "assets/Loaderimage2.gif";
 }

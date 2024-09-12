@@ -18,7 +18,7 @@ export class LoginComponent {
     })
     .catch(err =>{
       this.ShouldShowLoader = false;
-      this.toastr.error("Please enter correct credentails", "Invalid Credentials",);
+      this.toastr.warning("Please enter correct credentails", "Invalid Credentials",);
     });
     
   }

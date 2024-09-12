@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false); 
   isLoggedinguard: boolean = false;
-  constructor(private afauth: AngularFireAuth, private router : Router) { }
+  constructor(private afauth: AngularFireAuth, private router : Router, private toastr: ToastrService) { }
 
   login(email: string, password: string)
   {
@@ -52,7 +53,7 @@ export class AuthService {
       this.loggedIn.next(false);
       localStorage.removeItem('user');
       this.isLoggedinguard = false;
-      // this.toastr.success("Logged Out Successfully")
+      this.toastr.success("Logged Out Successfully")
       this.router.navigate(['/login'])
     })
   }
