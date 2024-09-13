@@ -93,35 +93,50 @@ export class NewGstRegistrationComponent {
       leasedOrRentedAggrementUrl: this.selectedleasedOrRentedImageUrl,
       proofOfBusinessUrl: this.selectedProofOfBusinessImageUrl,
       isTermsAccepted: this.gstForm.value.isTermsAccepted,
-      isProduction : false
+      isProduction: false
     }
 
     this.registerService.saveData(formData)
     this.gstForm.reset()
   }
 
-  resetForm(){
+  resetForm() {
     this.gstForm.reset()
   }
 
-  onFileChoosen($event: { target: any}): void {
+  onFileChoosen($event: { target: any }): void {
     {
-      let button  = ($event.target as HTMLButtonElement)
+      let fileTypeError = false
+      let button = ($event.target as HTMLButtonElement)
       //pan. aadhar, electricity, passbook, photo 
       // propertytaxreceipt, leasedAgreement
-      let node  = ($event.target as HTMLInputElement).name;
+      let node = ($event.target as HTMLInputElement).name;
       let formElementName = ($event.target as HTMLInputElement).getAttribute('formControlName');
 
       const file = $event.target.files[0]
-      if($event.target.files[0].size > (this.maxFileSizeAllowedInMB*1024*1024))
-      {
-        if(formElementName != null)
-           this.gstForm.controls[formElementName].setErrors({ 'fileTooLarge': true })
+      if ($event.target.files[0].size > (this.maxFileSizeAllowedInMB * 1024 * 1024)) {
+        if (formElementName != null)
+          this.gstForm.controls[formElementName].setErrors({ 'fileTooLarge': true })
         return;
       }
-      
-      switch (node)
-      {
+
+      if (node == 'photo') {
+        console.log(file.type)
+        if (file.type != "image/jpg" && file.type != "image/png" && file.type != "image/jpeg") {
+          fileTypeError = true;
+        }
+      }
+      else if (file.type != "image/jpg" && file.type != "image/png" && file.type != "image/jpeg" && file.type != "application/pdf"){
+        fileTypeError = true;
+      }
+
+      if(fileTypeError){
+        if(formElementName != null)
+          this.gstForm.controls[formElementName].setErrors({ 'fileFormatInvalid': true })
+        return;
+      }
+
+      switch (node) {
         case 'photo':
           this.userImageUploadStatus = "Uploading..."
           break;
@@ -154,48 +169,46 @@ export class NewGstRegistrationComponent {
 
 
       console.log("Before Uploading. validation passed")
-      // this.uploadImageAndSetURL($event.target.files[0], node +"/"+  this.gstForm.value.panNumber + Date.now().toString() , node)
+      this.uploadImageAndSetURL($event.target.files[0], node +"/"+  this.gstForm.value.panNumber + Date.now().toString() , node)
     }
   }
 
-  uploadImageAndSetURL(image: File | undefined, filepath: string, key: string)
-  {
+  uploadImageAndSetURL(image: File | undefined, filepath: string, key: string) {
     this.registerService.uploadImage(image, filepath).subscribe({
-        complete: () =>{
-        this.registerService.getDownloadURL(filepath).subscribe(url =>{
-          switch(key)
-          {
-              case 'photo':
-                this.selectedUserImageUrl = url;
-                this.userImageUploadStatus = "Uploaded"
-                break;
-              case 'pan':
-                this.selectedPanImageUrl = url;
-                this.panImageUploadStatus = "Uploaded"
-                break;
-              case 'aadhar':
-                this.selectedAadharImageUrl = url;
-                this.aadharImageUploadStatus = "Uploaded"
-                break;
-              case 'electricity':
-                this.selectedElectricityImageUrl = url;
-                this.electricityImageUploadStatus = "Uploaded"
-                break;
-              case 'passbook':
-                this.selectedPassbookImageUrl = url;
-                this.passbookImageUploadStatus = "Uploaded"
-                break;
-              case 'propertytaxreceipt':
-                this.selectedProofOfBusinessImageUrl = url;
-                this.proofOfBusinessImageUploadStatus = "Uploaded"
-                break;
-              case 'leasedAgreement':
-                this.selectedleasedOrRentedImageUrl = url;
-                this.leasedOrRentedImageUploadStatus = "Uploaded"
-                break;    
+      complete: () => {
+        this.registerService.getDownloadURL(filepath).subscribe(url => {
+          switch (key) {
+            case 'photo':
+              this.selectedUserImageUrl = url;
+              this.userImageUploadStatus = "Uploaded"
+              break;
+            case 'pan':
+              this.selectedPanImageUrl = url;
+              this.panImageUploadStatus = "Uploaded"
+              break;
+            case 'aadhar':
+              this.selectedAadharImageUrl = url;
+              this.aadharImageUploadStatus = "Uploaded"
+              break;
+            case 'electricity':
+              this.selectedElectricityImageUrl = url;
+              this.electricityImageUploadStatus = "Uploaded"
+              break;
+            case 'passbook':
+              this.selectedPassbookImageUrl = url;
+              this.passbookImageUploadStatus = "Uploaded"
+              break;
+            case 'propertytaxreceipt':
+              this.selectedProofOfBusinessImageUrl = url;
+              this.proofOfBusinessImageUploadStatus = "Uploaded"
+              break;
+            case 'leasedAgreement':
+              this.selectedleasedOrRentedImageUrl = url;
+              this.leasedOrRentedImageUploadStatus = "Uploaded"
+              break;
           }
         })
-      }, 
+      },
     })
   }
 }
