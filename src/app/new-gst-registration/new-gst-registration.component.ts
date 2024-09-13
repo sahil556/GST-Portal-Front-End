@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RegisterGstService } from '../services/register-gst.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControlName, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { GstForm } from '../models/gst-form';
 import { finalize, Observable } from 'rxjs';
 
@@ -10,6 +10,7 @@ import { finalize, Observable } from 'rxjs';
   styleUrl: './new-gst-registration.component.css'
 })
 export class NewGstRegistrationComponent {
+  maxFileSizeAllowedInMB = 1;
   gstForm: FormGroup = new FormGroup({});
   selectedUserImageUrl: string = "";
   userImageUploadStatus: string = "";
@@ -108,9 +109,17 @@ export class NewGstRegistrationComponent {
       let button  = ($event.target as HTMLButtonElement)
       //pan. aadhar, electricity, passbook, photo 
       // propertytaxreceipt, leasedAgreement
-      console.log($event.target)
       let node  = ($event.target as HTMLInputElement).name;
-      console.log(node)
+      let formElementName = ($event.target as HTMLInputElement).getAttribute('formControlName');
+
+      const file = $event.target.files[0]
+      if($event.target.files[0].size > (this.maxFileSizeAllowedInMB*1024*1024))
+      {
+        if(formElementName != null)
+           this.gstForm.controls[formElementName].setErrors({ 'fileTooLarge': true })
+        return;
+      }
+      
       switch (node)
       {
         case 'photo':
@@ -142,7 +151,10 @@ export class NewGstRegistrationComponent {
       //     this.imgSrc = e.target.result;
       // }
       // reader.readAsDataURL($event?.target.files[0]);
-      this.uploadImageAndSetURL($event.target.files[0], node +"/"+  this.gstForm.value.panNumber + Date.now().toString() , node)
+
+
+      console.log("Before Uploading. validation passed")
+      // this.uploadImageAndSetURL($event.target.files[0], node +"/"+  this.gstForm.value.panNumber + Date.now().toString() , node)
     }
   }
 
@@ -186,6 +198,5 @@ export class NewGstRegistrationComponent {
       }, 
     })
   }
-
 }
 

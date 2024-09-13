@@ -164,7 +164,7 @@
                             &nbsp;
                             <span *ngIf="userImageUploadStatus" class="badge rounded-pill bg-info text-dark">{{userImageUploadStatus}}</span>
                             
-                            <input formControlName="applicantImg" type="file" accept="image/*" name="photo"
+                            <input formControlName="applicantImg" type="file" accept="image/jpeg, image/png" name="photo"
                                 id="" class="form-control" (change)="onFileChoosen($event)"
                                 [ngClass]="{'is-invalid': fc['applicantImg'].touched && fc['applicantImg'].invalid}">
                             
@@ -181,7 +181,7 @@
                             <label for="" class="formItemLabelMargin"> Upload PAN Card </label>
                             <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
                             <span *ngIf="panImageUploadStatus" class="badge rounded-pill bg-info text-dark">{{panImageUploadStatus}}</span>
-                            <input formControlName="panCardImg" type="file" accept="image/JPEG" name="pan" id=""
+                            <input formControlName="panCardImg" type="file" accept="image/JPEG*,.pdf" name="pan" id=""
                                 class="form-control" (change)="onFileChoosen($event)"
                                 [ngClass]="{'is-invalid': fc['panCardImg'].touched && fc['panCardImg'].invalid}">
                             <div class="alert alert-danger"
@@ -198,7 +198,7 @@
                             <label for="" class="formItemLabelMargin"> Upload Aadhar Card </label>
                             <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
                             <span *ngIf="aadharImageUploadStatus" class="badge rounded-pill bg-info text-dark">{{aadharImageUploadStatus}}</span>
-                            <input formControlName="aadharCardImg" type="file" accept="image/JPEG*,.pdf" name="aadhar"
+                            <input formControlName="aadharCardImg" type="file" accept=".png,.jpg,.jpeg,.pdf" name="aadhar"
                                 id="" class="form-control" (change)="onFileChoosen($event)"
                                 [ngClass]="{'is-invalid': fc['aadharCardImg'].touched && fc['aadharCardImg'].invalid}">
                             <div class="alert alert-danger"
@@ -227,7 +227,7 @@
                                     class="mandatory">*</span> </label>
                             <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
                             <span *ngIf="electricityImageUploadStatus" class="badge rounded-pill bg-info text-dark">{{electricityImageUploadStatus}}</span>
-                            <input formControlName="electricityBillImg" type="file" accept="image/JPEG"
+                            <input formControlName="electricityBillImg" type="file" accept="image/JPEG*,.pdf"
                                 name="electricity" id="" class="form-control" (change)="onFileChoosen($event)"
                                 [ngClass]="{'is-invalid': fc['electricityBillImg'].touched && fc['electricityBillImg'].invalid}">
                             <div class="alert alert-danger"
@@ -341,7 +341,7 @@
                             <label for="" class="formItemLabelMargin"> Leased / Rent Agreement </label>
                             <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
                             <span *ngIf="leasedOrRentedImageUploadStatus" class="badge rounded-pill bg-info text-dark">{{leasedOrRentedImageUploadStatus}}</span>
-                            <input formControlName="leaseOrRentAggrement" type="file" accept="image/JPEG*,.pdf"
+                            <input formControlName="leaseOrRentAggrement" type="file" accept="image/jpeg,.pdf"
                                 name="leasedAgreement" id="" class="form-control" (change)="onFileChoosen($event)"
                                 [ngClass]="{'is-invalid': fc['leaseOrRentAggrement'].touched && fc['leaseOrRentAggrement'].invalid}">
                             <div class="alert alert-danger"
