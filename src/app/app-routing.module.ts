@@ -4,11 +4,13 @@ import { NewGstRegistrationComponent } from './new-gst-registration/new-gst-regi
 import { LoginComponent } from './auth/login/login.component';
 import { authGuard } from './auth/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
 
 const routes: Routes = [
   { path: '', component: NewGstRegistrationComponent},
   { path: 'login', component: LoginComponent},
-  {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]}
+  {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]},
+  {path: 'about-us', component: AboutusComponent}
 ];
 
 @NgModule({
