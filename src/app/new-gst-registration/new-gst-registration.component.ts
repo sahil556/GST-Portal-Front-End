@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class NewGstRegistrationComponent {
   maxFileSizeAllowedInMB = 1;
   IsLoading: Boolean = false;
+  IsApplicationSucceeded: Boolean = false;
   gstForm: FormGroup = new FormGroup({});
   selectedUserImageUrl: string = "";
   userImageUploadStatus: string = "";
@@ -110,6 +111,7 @@ export class NewGstRegistrationComponent {
     else
     {
       console.log("direct call")
+      this.IsApplicationSucceeded = true;
       this.SaveDataOnCloud(formData);
     }
   }
@@ -118,6 +120,7 @@ export class NewGstRegistrationComponent {
   {
     this.registerService.saveData(formData).then((docRef) =>{
       console.log(docRef)
+      this.toast.success("we will start processing application shortly.", "Application Submitted")
       this.gstForm.reset()
       this.IsLoading = false; 
     },

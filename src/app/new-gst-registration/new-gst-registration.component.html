@@ -400,6 +400,9 @@
             </div>
         </div>
     </form>
+    <div *ngIf="IsApplicationSucceeded" style="color: rgb(103, 188, 103); padding: 10px;">
+        <h5>Application submitted successfully.</h5>
+    </div>
     <div class="overlay" *ngIf="IsLoading">
         <app-loader class="loader"></app-loader>
     </div>
