@@ -395,9 +395,12 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <button type="submit" class="btn btn-success" [disabled]="gstForm.invalid">Submit</button>
+                <button type="submit" class="btn btn-success" >Submit</button>
                 <button type="button" style="margin-left: 10px;" class="btn btn-primary" (click)="resetForm()">Reset</button>
             </div>
         </div>
     </form>
+    <div class="overlay" *ngIf="IsLoading">
+        <app-loader class="loader"></app-loader>
+    </div>
 </div>

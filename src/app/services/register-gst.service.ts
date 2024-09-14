@@ -46,9 +46,7 @@ export class RegisterGstService {
     console.log("Within service")
     console.log(formData)
     formData.isProduction = environment.isProduction
-      this.angularFireStore.collection('gstData').add(formData).then(docRef =>{
-        console.log("GST Data Uploaded")
-      })
+    return this.angularFireStore.collection('gstData').add(formData);
   }
 }
 

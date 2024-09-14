@@ -3,6 +3,7 @@ import { RegisterGstService } from '../services/register-gst.service';
 import { AbstractControl, FormBuilder, FormControlName, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { GstForm } from '../models/gst-form';
 import { finalize, Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-new-gst-registration',
@@ -11,6 +12,7 @@ import { finalize, Observable } from 'rxjs';
 })
 export class NewGstRegistrationComponent {
   maxFileSizeAllowedInMB = 1;
+  IsLoading: Boolean = false;
   gstForm: FormGroup = new FormGroup({});
   selectedUserImageUrl: string = "";
   userImageUploadStatus: string = "";
@@ -33,7 +35,7 @@ export class NewGstRegistrationComponent {
   selectedProofOfBusinessImageUrl: string = "";
   proofOfBusinessImageUploadStatus: string = "";
 
-  constructor(private formBuilder: FormBuilder, private registerService: RegisterGstService) {
+  constructor(private formBuilder: FormBuilder, private registerService: RegisterGstService, private toast: ToastrService) {
     this.gstForm = this.formBuilder.group({
       title: ['sahil', Validators.required],
       fatherName: ['sahi', Validators.required],
@@ -66,7 +68,7 @@ export class NewGstRegistrationComponent {
     return this.gstForm.controls;
   }
 
-  onSubmit() {
+  async onSubmit() {
     console.log("on submit is called");
     const formData: GstForm = {
       applicantName: this.gstForm.value.title,
@@ -96,12 +98,47 @@ export class NewGstRegistrationComponent {
       isProduction: false
     }
 
-    this.registerService.saveData(formData)
-    this.gstForm.reset()
+    this.IsLoading = true;
+    if(this.IsFileUploadInProgress())
+    {
+      //TODO: check again for delayed upload
+      console.log("Waiting for file upload")
+      await new Promise(f => setTimeout(()=>{
+        this.SaveDataOnCloud(formData);
+      }, 3000));
+    }
+    else
+    {
+      console.log("direct call")
+      this.SaveDataOnCloud(formData);
+    }
+  }
+
+  SaveDataOnCloud(formData: GstForm)
+  {
+    this.registerService.saveData(formData).then((docRef) =>{
+      console.log(docRef)
+      this.gstForm.reset()
+      this.IsLoading = false; 
+    },
+    ).catch((err) =>{
+      this.toast.error("please try again after some time", "Something went wrong !")
+      this.IsLoading = false; 
+    })
+  }
+
+  IsFileUploadInProgress(): Boolean
+  {
+    return this.userImageUploadStatus == "Uploading..." || this.panImageUploadStatus == "Uploading..." || this.aadharImageUploadStatus == "Uploading..."
+      || this.passbookImageUploadStatus == "Uploading..." || this.electricityImageUploadStatus == "Uploading..." || this.leasedOrRentedImageUploadStatus == "Uploading..."
+      || this.proofOfBusinessImageUploadStatus == "Uploading...";
   }
 
   resetForm() {
     this.gstForm.reset()
+    this.userImageUploadStatus = this.panImageUploadStatus = this.aadharImageUploadStatus =
+       this.passbookImageUploadStatus = this.electricityImageUploadStatus = this.leasedOrRentedImageUploadStatus =
+       this.proofOfBusinessImageUploadStatus = "";
   }
 
   onFileChoosen($event: { target: any }): void {
