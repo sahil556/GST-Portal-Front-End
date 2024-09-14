@@ -173,7 +173,7 @@
                                 this field is required</div>
                             <div class="alert alert-danger"
                                 *ngIf="fc['applicantImg'].touched && fc['applicantImg'].invalid && gstForm.controls['applicantImg'].hasError('fileTooLarge')">
-                                Image must not exceed 1 MB</div>
+                                File must not exceed {{maxFileSizeAllowedInMB}} MB</div>
                             <div class="alert alert-danger"
                                 *ngIf="fc['applicantImg'].touched && fc['applicantImg'].invalid && gstForm.controls['applicantImg'].hasError('fileFormatInvalid')">
                                 Invalid File Format !</div>
@@ -192,7 +192,7 @@
                                 this field is required</div>
                             <div class="alert alert-danger"
                                 *ngIf="fc['panCardImg'].touched && fc['panCardImg'].invalid && gstForm.controls['panCardImg'].hasError('fileTooLarge')">
-                                Image must not exceed 1 MB</div>
+                                File must not exceed {{maxFileSizeAllowedInMB}} MB</div>
                         </div>
                     </div>
 
@@ -206,7 +206,7 @@
                                 [ngClass]="{'is-invalid': fc['aadharCardImg'].touched && fc['aadharCardImg'].invalid}">
                             <div class="alert alert-danger"
                                 *ngIf="fc['aadharCardImg'].touched && fc['aadharCardImg'].invalid && gstForm.controls['aadharCardImg'].hasError('fileTooLarge')">
-                                Image must not exceed 1 MB</div>
+                                File must not exceed {{maxFileSizeAllowedInMB}} MB</div>
                         </div>
                     </div>
 
@@ -220,7 +220,7 @@
                                 [ngClass]="{'is-invalid': fc['passbookImg'].touched && fc['passbookImg'].invalid}">
                             <div class="alert alert-danger"
                                 *ngIf="fc['passbookImg'].touched && fc['passbookImg'].invalid && gstForm.controls['passbookImg'].hasError('fileTooLarge')">
-                                Image must not exceed 1 MB</div>
+                                File must not exceed {{maxFileSizeAllowedInMB}} MB</div>
                         </div>
                     </div>
 
@@ -238,7 +238,7 @@
                                 this field is required</div>
                             <div class="alert alert-danger"
                                 *ngIf="fc['electricityBillImg'].touched && fc['electricityBillImg'].invalid && gstForm.controls['electricityBillImg'].hasError('fileTooLarge')">
-                                Image must not exceed 1 MB</div>
+                                File must not exceed {{maxFileSizeAllowedInMB}} MB</div>
                         </div>
                     </div>
                 </div>
@@ -349,7 +349,7 @@
                                 [ngClass]="{'is-invalid': fc['leaseOrRentAggrement'].touched && fc['leaseOrRentAggrement'].invalid}">
                             <div class="alert alert-danger"
                                 *ngIf="fc['leaseOrRentAggrement'].touched && fc['leaseOrRentAggrement'].invalid && gstForm.controls['leaseOrRentAggrement'].hasError('fileTooLarge')">
-                                Image must not exceed 1 MB</div>
+                                File must not exceed {{maxFileSizeAllowedInMB}} MB</div>
                         </div>
                     </div>
 
@@ -376,7 +376,7 @@
                                 [ngClass]="{'is-invalid': fc['proofOfBusinessImg'].touched && fc['proofOfBusinessImg'].invalid}">
                             <div class="alert alert-danger"
                                 *ngIf="fc['proofOfBusinessImg'].touched && fc['proofOfBusinessImg'].invalid && gstForm.controls['proofOfBusinessImg'].hasError('fileTooLarge')">
-                                Image must not exceed 1 MB</div>
+                                File must not exceed {{maxFileSizeAllowedInMB}} MB</div>
                         </div>
                     </div>
 
@@ -395,7 +395,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <button type="submit" class="btn btn-success" >Submit</button>
+                <button type="submit" class="btn btn-success" [disabled]="gstForm.invalid">Submit</button>
                 <button type="button" style="margin-left: 10px;" class="btn btn-primary" (click)="resetForm()">Reset</button>
             </div>
         </div>

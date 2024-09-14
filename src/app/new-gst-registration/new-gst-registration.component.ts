@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './new-gst-registration.component.css'
 })
 export class NewGstRegistrationComponent {
-  maxFileSizeAllowedInMB = 1;
+  maxFileSizeAllowedInMB = 2;
   IsLoading: Boolean = false;
   IsApplicationSucceeded: Boolean = false;
   gstForm: FormGroup = new FormGroup({});
@@ -99,35 +99,31 @@ export class NewGstRegistrationComponent {
       isProduction: false
     }
 
-    this.IsLoading = true;
     if(this.IsFileUploadInProgress())
     {
+      this.toast.warning("please wait till all files are marked as Uploaded.", "Please Wait !")
+      return;
       //TODO: check again for delayed upload
-      console.log("Waiting for file upload")
-      await new Promise(f => setTimeout(()=>{
-        this.SaveDataOnCloud(formData);
-      }, 3000));
+      // console.log("Waiting for file upload")
+      // await new Promise(f => setTimeout(()=>{
+      //   this.SaveDataOnCloud(formData);
+      // }, 3000));
     }
     else
     {
-      console.log("direct call")
-      this.IsApplicationSucceeded = true;
-      this.SaveDataOnCloud(formData);
+      this.IsLoading = true;
+      this.registerService.saveData(formData).then((docRef) =>{
+        console.log(docRef)
+        this.toast.success("we will start processing application shortly.", "Application Submitted")
+        this.gstForm.reset()
+        this.IsLoading = false; 
+        this.IsApplicationSucceeded = true;
+      },
+      ).catch((err) =>{
+        this.toast.error("please try again after some time", "Something went wrong !")
+        this.IsLoading = false; 
+      })
     }
-  }
-
-  SaveDataOnCloud(formData: GstForm)
-  {
-    this.registerService.saveData(formData).then((docRef) =>{
-      console.log(docRef)
-      this.toast.success("we will start processing application shortly.", "Application Submitted")
-      this.gstForm.reset()
-      this.IsLoading = false; 
-    },
-    ).catch((err) =>{
-      this.toast.error("please try again after some time", "Something went wrong !")
-      this.IsLoading = false; 
-    })
   }
 
   IsFileUploadInProgress(): Boolean
@@ -142,6 +138,7 @@ export class NewGstRegistrationComponent {
     this.userImageUploadStatus = this.panImageUploadStatus = this.aadharImageUploadStatus =
        this.passbookImageUploadStatus = this.electricityImageUploadStatus = this.leasedOrRentedImageUploadStatus =
        this.proofOfBusinessImageUploadStatus = "";
+      this.IsApplicationSucceeded = false;
   }
 
   onFileChoosen($event: { target: any }): void {
