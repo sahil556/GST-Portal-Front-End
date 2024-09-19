@@ -8,13 +8,12 @@
                 <li class="nav-item"><a [routerLink]="['/']" class="nav-link">Home</a></li>
                 <li class="nav-item"><a [routerLink]="['dashboard']" class="nav-link">Dashboard</a></li>
                 <li class="nav-item"><a [routerLink]="['about-us']" class="nav-link">About Us</a></li>
-                <!-- <li class="nav-item"><a href="term-conditions" class="nav-link">Terms & Conditions</a></li> -->
+                <li class="nav-item"><a [routerLink]="['terms-and-conditions']" class="nav-link">Terms & Conditions</a></li>
                 <li *ngIf="isLoggedin$ | async;" class="nav-item"><button class="nav-link" (click)="onLogout()">Logout</button></li>
 
                 <!-- <li class="nav-item"><a href="contact" class="nav-link">Contact</a></li> -->
             </ul>
             
         </div>
-        <p class="mb-2 mt-2 text-center">Copyright GSTFiller &#169; 2024.</p>
     </div>
 </footer>

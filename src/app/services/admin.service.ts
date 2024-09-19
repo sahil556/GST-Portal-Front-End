@@ -13,6 +13,8 @@ export class AdminService {
 
   loadDataFromFirestore()
   {
+    console.log("Is Production")
+    console.log(environment.isProduction)
     return this.angularFireStore.collection('gstData', ref => ref.where('isProduction', '==', environment.isProduction)).snapshotChanges().pipe(
       map(actions => {
         return actions.map(a =>{

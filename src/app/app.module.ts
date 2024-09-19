@@ -19,6 +19,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { LoaderComponent } from './layouts/loader/loader.component';
 import { ToastrModule } from 'ngx-toastr';
 import { AboutusComponent } from './aboutus/aboutus.component';
+import { TermsAndConditionComponent } from './terms-and-condition/terms-and-condition.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AboutusComponent } from './aboutus/aboutus.component';
     DashboardComponent,
     LoaderComponent,
     AboutusComponent,
+    TermsAndConditionComponent,
   ],
   imports: [
     BrowserModule,
