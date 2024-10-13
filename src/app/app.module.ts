@@ -20,6 +20,15 @@ import { LoaderComponent } from './layouts/loader/loader.component';
 import { ToastrModule } from 'ngx-toastr';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { TermsAndConditionComponent } from './terms-and-condition/terms-and-condition.component';
+import { NavbarComponent } from './layouts/navbar/navbar.component';
+import { AuditsAndAssuranceComponent } from './offerings/audits-and-assurance/audits-and-assurance.component';
+import { RiskAdvisoryComponent } from './offerings/risk-advisory/risk-advisory.component';
+import { TaxationComponent } from './offerings/taxation/taxation.component';
+import { InternationalTaxationComponent } from './offerings/international-taxation/international-taxation.component';
+import { CorporateSupportComponent } from './offerings/corporate-support/corporate-support.component';
+import { AccountingSystemComponent } from './offerings/accounting-system/accounting-system.component';
+import { AccrualAccountingSystemComponent } from './offerings/accrual-accounting-system/accrual-accounting-system.component';
+import { KpoAccountComponent } from './offerings/kpo-account/kpo-account.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +42,15 @@ import { TermsAndConditionComponent } from './terms-and-condition/terms-and-cond
     LoaderComponent,
     AboutusComponent,
     TermsAndConditionComponent,
+    NavbarComponent,
+    AuditsAndAssuranceComponent,
+    RiskAdvisoryComponent,
+    TaxationComponent,
+    InternationalTaxationComponent,
+    CorporateSupportComponent,
+    AccountingSystemComponent,
+    AccrualAccountingSystemComponent,
+    KpoAccountComponent,
   ],
   imports: [
     BrowserModule,
