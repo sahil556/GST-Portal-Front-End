@@ -13,5 +13,7 @@ header {
 }
 
 nav {
-    padding-left: 20px;
+    padding-inline: 20px;
+    width: 100%;
+    position: fixed;
 }
