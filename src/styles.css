@@ -34,5 +34,17 @@ body {
     background-color: var(--primary-color);
 }
 
+.services-header{
+    color: #18064f;
+}
+
+.services-paragraph {
+    font-size: 16px;
+}
+
+.services-listitems {
+    font-size: 16px;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
