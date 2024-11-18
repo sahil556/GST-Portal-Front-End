@@ -1,0 +1,23 @@
+.form-item {
+  margin-bottom: 25px;
+  font-size: medium;
+}
+
+.formItemLabelMargin {
+  margin-bottom: 5px;
+}
+
+.alert {
+  margin-bottom: 1px;
+  height: 35px;
+  line-height: 30px;
+  padding: 0px 10px;
+}
+
+.formItemWarningMargin {
+  font-size: 12px;
+}
+
+.mandatory {
+  color: red;
+}

@@ -1,0 +1,20 @@
+<div class="form-group form-item">
+  <label class="formItemLabelMargin" [for]="label">{{ label }} <span *ngIf="isMandatory" class="mandatory">*</span></label>
+  <input
+    class="form-control"
+    [type]="type"
+    [formControl]="control"
+    class="form-control"
+    [placeholder]="placeholder"
+    [id]="label"
+    [ngClass]="{ 'is-invalid': control.touched && control.invalid && isMandatory }"
+  />
+  <div *ngFor="let item of errorMessages | keyvalue">
+    <div
+      class="alert alert-danger"
+      *ngIf="control.hasError(item.key) && control.touched"
+    >
+      {{ errorMessages[item.key] }}
+    </div>
+  </div>
+</div>

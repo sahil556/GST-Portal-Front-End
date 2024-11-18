@@ -29,6 +29,7 @@ import { CorporateSupportComponent } from './offerings/corporate-support/corpora
 import { AccountingSystemComponent } from './offerings/accounting-system/accounting-system.component';
 import { AccrualAccountingSystemComponent } from './offerings/accrual-accounting-system/accrual-accounting-system.component';
 import { KpoAccountComponent } from './offerings/kpo-account/kpo-account.component';
+import { InputFieldComponent } from './shared/input-field/input-field.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { KpoAccountComponent } from './offerings/kpo-account/kpo-account.compone
     AccountingSystemComponent,
     AccrualAccountingSystemComponent,
     KpoAccountComponent,
+    InputFieldComponent,
   ],
   imports: [
     BrowserModule,
