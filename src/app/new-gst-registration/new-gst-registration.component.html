@@ -138,62 +138,17 @@
         <div class="card shadow-effect">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group" class="form-item">
-                            <label for="businessName" class="formItemLabelMargin">Business Name <span
-                                    class="mandatory">*</span></label>
-                            <input formControlName="businessName" type="text" placeholder="Enter Business Name"
-                                class="form-control" name="" value="" id=""
-                                [ngClass]="{'is-invalid': fc['businessName'].touched && fc['businessName'].invalid}">
 
-                            <div class="alert alert-danger"
-                                *ngIf="fc['businessName'].touched && gstForm.controls['businessName'].hasError('required')">
-                                Applicant's Name is required</div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group" class="form-item">
-                            <label for="businessStartDate" class="formItemLabelMargin">Business Commencement Date <span
-                                    class="mandatory">*</span></label>
-                            <input formControlName="businessStartDate" type="date" placeholder="Enter Applicant's Name"
-                                class="form-control" name="" value="" id=""
-                                [ngClass]="{'is-invalid': fc['businessStartDate'].touched && fc['businessStartDate'].invalid}">
-
-                            <div class="alert alert-danger"
-                                *ngIf="fc['businessStartDate'].touched && gstForm.controls['businessStartDate'].hasError('required')">
-                                Applicant's Name is required</div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group" class="form-item">
-                            <label for="businessAddress" class="formItemLabelMargin">Business Address <span
-                                    class="mandatory">*</span></label>
-                            <input formControlName="businessAddress" type="text" placeholder="Enter Business Address"
-                                class="form-control" name="" value="" id=""
-                                [ngClass]="{'is-invalid': fc['businessAddress'].touched && fc['businessAddress'].invalid}">
-
-                            <div class="alert alert-danger"
-                                *ngIf="fc['businessAddress'].touched && gstForm.controls['businessAddress'].hasError('required')">
-                                Applicant's Name is required</div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group" class="form-item">
-                            <label for="natureOfBusiness" class="formItemLabelMargin">Nature of Business Activities to
-                                be carried <span class="mandatory">*</span></label>
-                            <input formControlName="natureOfBusiness" type="text"
-                                placeholder="Eg:- Jewellery Business, Consultancy Services, Footware, etc"
-                                class="form-control" name="" value="" id=""
-                                [ngClass]="{'is-invalid': fc['natureOfBusiness'].touched && fc['natureOfBusiness'].invalid}">
-
-                            <div class="alert alert-danger"
-                                *ngIf="fc['natureOfBusiness'].touched && gstForm.controls['natureOfBusiness'].hasError('required')">
-                                Applicant's Name is required</div>
-                        </div>
-                    </div>
+                    <div class="col-md-6" *ngFor="let field of businessFields">
+                            <app-input-field
+                              [control]="getFormControl(field.controlName)"
+                              [label]="field.label"
+                              [placeholder]="field.placeholder"
+                              [type]="field.type"
+                              [isMandatory]="field.required"
+                              [errorMessages]="field.errorMessages">
+                            </app-input-field>
+                          </div>
 
                     <div class="col-md-6">
                         <div class="form-group form-item">
