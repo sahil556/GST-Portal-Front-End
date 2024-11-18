@@ -1,36 +1,17 @@
 <div class="form-group" class="form-item">
-    <label for="" class="formItemLabelMargin"> {{Label}} <span
+    <label for="" class="formItemLabelMargin"> {{label}} <span
             class="mandatory">*</span></label>
-    <label class="formItemWarningMargin">&nbsp; (Only JPEG less than 2MB)</label>
-    <div class="row">
-        <div class="col-md-8">
-            <input type="file" accept="image/JPEG" name="{{fieldName}}"
-                id="" class="form-control" (change)="OnFileChoosen($event)"
-                [ngClass]="{'is-invalid': control?.touched && control?.invalid}">
-        </div>
-        <div class="col-md-4">
-            <button class="btn btn-success" name="{{fieldName}}"
-                [disabled]="!selectedFile" (click)="OnUploadImage($event)">
-                Upload
-            </button>
-        </div>
-    </div>
-    <div class="progress my-3">
-        <div
-          class="progress-bar progress-bar-info"
-          role="progressbar"
-          attr.aria-valuenow="{{ fileUploadProgress }}"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          [ngStyle]="{ width: fileUploadProgress + '%' }"
-        >
-          {{ fileUploadProgress }}%
-        </div>
-      </div>
-    <div class="alert alert-danger"
-        *ngIf="control?.touched && control?.invalid && control?.hasError('required')">
-        this field is required</div>
-    <div class="alert alert-danger"
-        *ngIf="control?.touched && control?.invalid && control?.hasError('fileTooLarge')">
-        Image must not exceed 1 MB</div>
+    <label class="formItemWarningMargin">&nbsp; {{restrictionMessage}}</label>
+
+        <input type="file" [accept]="accept" [formControlName]="formControlName"
+            id="" class="form-control" (change)="onFileSelected($event)"
+            [ngClass]="{'is-invalid': control.touched && control.invalid}">
+        &nbsp;
+        <span *ngIf="documentUploadStatus" class="badge rounded-pill bg-info text-dark">{{documentUploadStatus}}</span>
+
+     <div *ngIf="control.touched && control.invalid" class="alert alert-danger">
+        <div *ngIf="control.hasError('required')">This field is required</div>
+        <div *ngIf="control.hasError('fileTooLarge')">File must not exceed {{ maxFileSizeAllowedInMB }} MB</div>
+        <div *ngIf="control.hasError('fileFormatInvalid')">Invalid File Format!</div>
+     </div>
 </div>

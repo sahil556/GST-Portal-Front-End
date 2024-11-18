@@ -25,15 +25,21 @@
                     </div>
 
                     <div class="col-md-6">
-<!--
-                        <app-custom-file-upload
-                            [fieldName]="'photo'"
-                            [Label]="'Passport Size Photo'"
-                            [fileUploadProgress]="userImageProgress"
-                            [control]="$any(fc['applicantImg'])"
-                            [selectedFile]="selectedUserImage"
-                            (fileChoosen)="onFileChoosen($event)"
-                            ></app-custom-file-upload> -->
+
+                        <!-- <app-custom-file-upload
+                            [control]="getFormControl('applicantImg')"
+                            label="Passport Size Photo"
+                            accept="image/jpeg, image/png"
+                            [maxFileSizeAllowedInMB]="0.5"
+                            [documentUploadStatus]="userImageUploadStatus"
+                            [restrictionMessage]="'Only JPEG / PNG less than 2MB'"
+                            [errorMessages]="{
+                              required: 'This field is required',
+                              fileTooLarge: 'File must not exceed 2 MB',
+                              fileFormatInvalid: 'Invalid File Format!'
+                            }"
+                            (fileChange)="onFileChoosen($event)"
+                          ></app-custom-file-upload> -->
 
                         <div class="form-group" class="form-item">
                             <label for="" class="formItemLabelMargin"> Passport Size Photo <span
