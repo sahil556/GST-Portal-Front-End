@@ -14,6 +14,7 @@ import { CorporateSupportComponent } from './offerings/corporate-support/corpora
 import { AccrualAccountingSystemComponent } from './offerings/accrual-accounting-system/accrual-accounting-system.component';
 import { AccountingSystemComponent } from './offerings/accounting-system/accounting-system.component';
 import { KpoAccountComponent } from './offerings/kpo-account/kpo-account.component';
+import { MapComponent } from './map-component/map-component.component';
 
 const routes: Routes = [
   { path: '', component: NewGstRegistrationComponent},

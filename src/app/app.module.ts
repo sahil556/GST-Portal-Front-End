@@ -30,6 +30,7 @@ import { AccountingSystemComponent } from './offerings/accounting-system/account
 import { AccrualAccountingSystemComponent } from './offerings/accrual-accounting-system/accrual-accounting-system.component';
 import { KpoAccountComponent } from './offerings/kpo-account/kpo-account.component';
 import { InputFieldComponent } from './shared/input-field/input-field.component';
+import { MapComponent } from './map-component/map-component.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { InputFieldComponent } from './shared/input-field/input-field.component'
     AccrualAccountingSystemComponent,
     KpoAccountComponent,
     InputFieldComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,

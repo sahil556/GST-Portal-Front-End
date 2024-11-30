@@ -34,7 +34,7 @@ export const businessFields = [
   {
     controlName: 'hsnCode',
     label: 'HSN Code',
-    placeholder: '',
+    placeholder: 'Enter HSN Code',
     type: 'text',
     required: true,
     errorMessages: { required: 'HSN Code is required' },
