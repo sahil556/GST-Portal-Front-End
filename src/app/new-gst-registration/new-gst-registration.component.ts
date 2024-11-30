@@ -162,7 +162,7 @@ export class NewGstRegistrationComponent {
             'we will start processing application shortly.',
             'Application Submitted'
           );
-          this.gstForm.reset();
+          this.resetForm();
           this.IsLoading = false;
           this.IsApplicationSucceeded = true;
         })
@@ -198,6 +198,10 @@ export class NewGstRegistrationComponent {
       this.leasedOrRentedImageUploadStatus =
       this.proofOfBusinessImageUploadStatus =
         '';
+      this.gstForm.patchValue({
+        typeOfBusinessProperty: 'LeasedOrRented',
+        leasedOrRented: [this.typeOfBusinessPropertyProofOptions[0]],
+      });
     this.IsApplicationSucceeded = false;
   }
 
