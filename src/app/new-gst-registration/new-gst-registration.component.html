@@ -172,7 +172,7 @@
                             <label for="" class="formItemLabelMargin" *ngIf="gstForm.value.typeOfBusinessProperty == 'ConsentOrShared'">Consent / Shared</label>
                             <select formControlName="leasedOrRented"  name="" id="" class="form-control form-select"
                                 [ngClass]="{'is-invalid': fc['leasedOrRented'].touched && fc['leasedOrRented'].invalid}">
-                                <option *ngFor="let type of typeOfBusinessPropertyProofOptions" value="type">{{type}}</option>
+                                <option *ngFor="let type of typeOfBusinessPropertyProofOptions" value="{{type}}">{{type}}</option>
                             </select>
                             <div class="alert alert-danger"
                                 *ngIf="fc['leasedOrRented'].touched && fc['leasedOrRented'].invalid && gstForm.controls['leasedOrRented'].hasError('required')">
@@ -182,7 +182,7 @@
 
                     <div class="col-md-6">
                         <div class="form-group" class="form-item">
-                            <label for="" class="formItemLabelMargin"> Leased / Rent Agreement </label>
+                            <label for="" class="formItemLabelMargin"> {{ gstForm.value.leasedOrRented}} </label>
                             <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
                             <span *ngIf="leasedOrRentedImageUploadStatus" class="badge rounded-pill bg-info text-dark">{{leasedOrRentedImageUploadStatus}}</span>
                             <input formControlName="typeOfBusinessPropertyDocument" type="file" accept="image/jpeg,.pdf"

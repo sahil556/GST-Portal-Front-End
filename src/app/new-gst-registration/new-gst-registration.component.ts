@@ -43,8 +43,8 @@ export class NewGstRegistrationComponent {
   businessFields = businessFields;
 
   PropertyProofDocumentOptions = [
-    { type: "LeasedOrRented", documents: ["Lease/ Rent Agreement",	"Property Tax Receiept", "Municipal Khata Book", "Index", "7/12", "Electric Bill"]},
-    { type: "ConsentOrShared", documents: ["NOC Notarised",	"Property Tax Receiept", "Municipal Khata Book", "Index", "7/12", "Electric Bill"]}
+    { type: "LeasedOrRented", documents: ["Lease / Rent Agreement",	"Property Tax Receiept", "Municipal Khata Book", "Index", "7/12", "Electric Bill"]},
+    { type: "ConsentOrShared", documents: ["NOC Notarised",	"Property Tax Receipt", "Municipal Khata Book", "Index", "7/12", "Electric Bill"]}
   ]
 
   typeOfBusinessPropertyProofOptions: string[] = this.PropertyProofDocumentOptions[0].documents;
@@ -77,7 +77,7 @@ export class NewGstRegistrationComponent {
       businessAddress: ['sa', [Validators.required]],
       natureOfBusiness: ['sa', [Validators.required]],
       typeOfBusinessProperty: ['LeasedOrRented', [Validators.required]],
-      leasedOrRented: ['leasedOrRented'],
+      leasedOrRented: [this.typeOfBusinessPropertyProofOptions[0]],
       proofOfBusiness: ['proofOfBusiness'],
       typeOfBusinessPropertyDocument: [''],
       proofOfBusinessImg: [''],
@@ -102,6 +102,12 @@ export class NewGstRegistrationComponent {
         this.typeOfBusinessPropertyProofOptions = item.documents;
       }
     })
+
+    this.gstForm.patchValue(
+      {
+        leasedOrRented: this.typeOfBusinessPropertyProofOptions[0]
+      }
+    );
   }
 
   async onSubmit() {
