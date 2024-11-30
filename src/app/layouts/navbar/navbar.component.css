@@ -18,3 +18,7 @@ nav {
     width: 100%;
     position: fixed;
 }
+
+a {
+  font-weight: 500;
+}
