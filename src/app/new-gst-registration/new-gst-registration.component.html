@@ -154,10 +154,11 @@
                         <div class="form-group form-item">
                             <label for="" class="formItemLabelMargin">Type of Business Property <span
                                     class="mandatory">*</span></label>
-                            <select formControlName="typeOfBusinessProperty" name="" id=""
+                            <select (ngModelChange)='SelectionChange()' formControlName="typeOfBusinessProperty" name="" id=""
                                 class="form-control form-select "
                                 [ngClass]="{'is-invalid': fc['typeOfBusinessProperty'].touched && fc['typeOfBusinessProperty'].invalid}">
-                                <option value="LeasedOrRented" selected>Leased / Rented</option>
+                                <option value="LeasedOrRented" >Leased / Rented</option>
+                                <option value="ConsentOrShared">Consent / Shared</option>
                             </select>
                             <div class="alert alert-danger"
                                 *ngIf="fc['typeOfBusinessProperty'].touched && fc['typeOfBusinessProperty'].invalid && gstForm.controls['typeOfBusinessProperty'].hasError('required')">
@@ -167,10 +168,11 @@
 
                     <div class="col-md-6">
                         <div class="form-group" class="form-item">
-                            <label for="" class="formItemLabelMargin">Leased / Rented</label>
-                            <select formControlName="leasedOrRented" name="" id="" class="form-control form-select"
+                            <label for="" class="formItemLabelMargin" *ngIf="gstForm.value.typeOfBusinessProperty == 'LeasedOrRented'">Leased / Rented</label>
+                            <label for="" class="formItemLabelMargin" *ngIf="gstForm.value.typeOfBusinessProperty == 'ConsentOrShared'">Consent / Shared</label>
+                            <select formControlName="leasedOrRented"  name="" id="" class="form-control form-select"
                                 [ngClass]="{'is-invalid': fc['leasedOrRented'].touched && fc['leasedOrRented'].invalid}">
-                                <option value="leasedOrRented" selected>Leased / Rented Agreement</option>
+                                <option *ngFor="let type of typeOfBusinessPropertyProofOptions" value="type">{{type}}</option>
                             </select>
                             <div class="alert alert-danger"
                                 *ngIf="fc['leasedOrRented'].touched && fc['leasedOrRented'].invalid && gstForm.controls['leasedOrRented'].hasError('required')">
@@ -183,11 +185,11 @@
                             <label for="" class="formItemLabelMargin"> Leased / Rent Agreement </label>
                             <label class="formItemWarningMargin">&nbsp; ( Less than 2MB )</label>
                             <span *ngIf="leasedOrRentedImageUploadStatus" class="badge rounded-pill bg-info text-dark">{{leasedOrRentedImageUploadStatus}}</span>
-                            <input formControlName="leaseOrRentAggrement" type="file" accept="image/jpeg,.pdf"
+                            <input formControlName="typeOfBusinessPropertyDocument" type="file" accept="image/jpeg,.pdf"
                                 name="leasedAgreement" id="" class="form-control" (change)="onFileChoosen($event)"
-                                [ngClass]="{'is-invalid': fc['leaseOrRentAggrement'].touched && fc['leaseOrRentAggrement'].invalid}">
+                                [ngClass]="{'is-invalid': fc['typeOfBusinessPropertyDocument'].touched && fc['typeOfBusinessPropertyDocument'].invalid}">
                             <div class="alert alert-danger"
-                                *ngIf="fc['leaseOrRentAggrement'].touched && fc['leaseOrRentAggrement'].invalid && gstForm.controls['leaseOrRentAggrement'].hasError('fileTooLarge')">
+                                *ngIf="fc['typeOfBusinessPropertyDocument'].touched && fc['typeOfBusinessPropertyDocument'].invalid && gstForm.controls['typeOfBusinessPropertyDocument'].hasError('fileTooLarge')">
                                 File must not exceed {{maxFileSizeAllowedInMB}} MB</div>
                         </div>
                     </div>

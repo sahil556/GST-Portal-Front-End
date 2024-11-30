@@ -42,6 +42,13 @@ export class NewGstRegistrationComponent {
 
   businessFields = businessFields;
 
+  PropertyProofDocumentOptions = [
+    { type: "LeasedOrRented", documents: ["Lease/ Rent Agreement",	"Property Tax Receiept", "Municipal Khata Book", "Index", "7/12", "Electric Bill"]},
+    { type: "ConsentOrShared", documents: ["NOC Notarised",	"Property Tax Receiept", "Municipal Khata Book", "Index", "7/12", "Electric Bill"]}
+  ]
+
+  typeOfBusinessPropertyProofOptions: string[] = this.PropertyProofDocumentOptions[0].documents;
+
   constructor(
     private formBuilder: FormBuilder,
     private registerService: RegisterGstService,
@@ -72,7 +79,7 @@ export class NewGstRegistrationComponent {
       typeOfBusinessProperty: ['LeasedOrRented', [Validators.required]],
       leasedOrRented: ['leasedOrRented'],
       proofOfBusiness: ['proofOfBusiness'],
-      leaseOrRentAggrement: [''],
+      typeOfBusinessPropertyDocument: [''],
       proofOfBusinessImg: [''],
       isTermsAccepted: [true, [Validators.required, Validators.requiredTrue]],
     });
@@ -84,6 +91,17 @@ export class NewGstRegistrationComponent {
 
   getFormControl(controlName: string): FormControl {
     return this.gstForm.controls[controlName] as FormControl;
+  }
+
+  SelectionChange()
+  {
+    let selectedType = this.gstForm.value.typeOfBusinessProperty;
+    this.PropertyProofDocumentOptions.map(item =>{
+      if(item.type == selectedType)
+      {
+        this.typeOfBusinessPropertyProofOptions = item.documents;
+      }
+    })
   }
 
   async onSubmit() {
@@ -107,6 +125,7 @@ export class NewGstRegistrationComponent {
       businessStartDate: this.gstForm.value.businessStartDate,
       businessAddress: this.gstForm.value.businessAddress,
       natureOfBusiness: this.gstForm.value.natureOfBusiness,
+      // hsnCode: this.gstForm.value.hsnCode,
       typeOfBusiness: this.gstForm.value.typeOfBusinessProperty,
       LeasedOrRented: this.gstForm.value.leasedOrRented,
       proofOfBusiness: this.gstForm.value.proofOfBusiness,
