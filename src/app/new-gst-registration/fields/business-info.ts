@@ -31,4 +31,12 @@ export const businessFields = [
     required: true,
     errorMessages: { required: 'Nature of Business is required' },
   },
+  {
+    controlName: 'hsnCode',
+    label: 'HSN Code',
+    placeholder: '',
+    type: 'text',
+    required: true,
+    errorMessages: { required: 'HSN Code is required' },
+  },
 ];

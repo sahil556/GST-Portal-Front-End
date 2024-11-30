@@ -18,6 +18,7 @@ export interface GstForm {
     businessStartDate: Date;
     businessAddress: string;
     natureOfBusiness: string;
+    hsnCode: string;
     typeOfBusiness: string;
     LeasedOrRented: string;
     proofOfBusiness: string;
