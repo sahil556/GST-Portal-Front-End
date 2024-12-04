@@ -31,6 +31,7 @@ import { AccrualAccountingSystemComponent } from './offerings/accrual-accounting
 import { KpoAccountComponent } from './offerings/kpo-account/kpo-account.component';
 import { InputFieldComponent } from './shared/input-field/input-field.component';
 import { MapComponent } from './map-component/map-component.component';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { MapComponent } from './map-component/map-component.component';
     provideFirebaseApp(() => initializeApp({"projectId":"gst-data-collector","appId":"1:68683473962:web:a16b68cf28fdd320620f53","storageBucket":"gst-data-collector.appspot.com","apiKey":"AIzaSyBNWRaeZFigfry_-IzWXlwa1sWGTk6dQiA","authDomain":"gst-data-collector.firebaseapp.com","messagingSenderId":"68683473962","measurementId":"G-Q9BJRH49HM"})),
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient()
   ],
   bootstrap: [AppComponent]
 })

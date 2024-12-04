@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -13,21 +14,27 @@ export class LoginComponent implements OnInit {
 
   IsLoginForm: boolean = true;
 
+
   ngOnInit(): void {
     console.log("Rerendered Login")
   }
-  constructor(private authservice : AuthService, private toastr: ToastrService){}
-  
+  constructor(private httpClient: HttpClient, private authservice : AuthService, private toastr: ToastrService){}
+
   async onSubmit(formValue:any):Promise<void>{
     this.ShouldShowLoader = true;
     if(this.IsLoginForm)
     {
+      let loginDto = {
+        "userEmail" : formValue.email,
+        "password" : formValue.password
+      }
+
+
       this.authservice.login(formValue.email, formValue.password).then(()=>{
         this.toastr.success("Logged in successfully")
       })
       .catch(err =>{
         this.ShouldShowLoader = false;
-        this.toastr.warning("Please enter correct credentails", "Invalid Credentials",);
       });
     }
     else
@@ -42,7 +49,7 @@ export class LoginComponent implements OnInit {
         this.ShouldShowLoader = false;
         this.toastr.warning("some thing went wront !", "please try after some time");
       })
-      
+
     }
   }
 
