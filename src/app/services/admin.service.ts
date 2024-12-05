@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { environment } from '../../environments/environment';
 import { firstValueFrom, map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';

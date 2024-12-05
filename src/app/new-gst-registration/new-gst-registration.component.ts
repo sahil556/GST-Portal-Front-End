@@ -162,7 +162,8 @@ export class NewGstRegistrationComponent {
     if (this.IsFileUploadInProgress()) {
       this.toast.warning(
         'please wait till all files are marked as Uploaded.',
-        'Please Wait !'
+        'Please Wait !',
+        {timeOut: 5000}
       );
       return;
       //TODO: check again for delayed upload
@@ -178,16 +179,23 @@ export class NewGstRegistrationComponent {
           console.log(docRef);
           this.toast.success(
             'we will start processing application shortly.',
-            'Application Submitted'
+            'Application Submitted',
+            { timeOut: 5000 }
           );
           this.resetForm();
           this.IsLoading = false;
           this.IsApplicationSucceeded = true;
         })
         .catch((err) => {
+          let validationFailedProperties = "";
+          for (const [key, value] of Object.entries(err.error.errors)) {
+              validationFailedProperties += `${key}, `
+          }
+
           this.toast.error(
-            'please try again after some time',
-            'Something went wrong !'
+            validationFailedProperties,
+            'Validation Failed for below properties',
+            { timeOut: 10000 }
           );
           this.IsLoading = false;
         });

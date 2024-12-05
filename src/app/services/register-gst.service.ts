@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { GstForm } from '../models/gst-form';
-import { finalize, firstValueFrom, Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
@@ -11,7 +9,7 @@ import { environment } from '../../environments/environment';
 })
 export class RegisterGstService {
 
-  constructor(private http: HttpClient, private angularFireStore: AngularFirestore, private angularFireStorage: AngularFireStorage) { }
+  constructor(private http: HttpClient) { }
 
   downloadURL$ : Observable<string> | undefined
 
@@ -29,17 +27,19 @@ export class RegisterGstService {
     return responce;
   }
 
-  getDownloadURL(filePath: string)
-  {
-    return this.angularFireStorage.ref(filePath).getDownloadURL()
-  }
-
   saveData(formData: GstForm )
   {
-    console.log("Within service")
-    console.log(formData)
-    formData.isProduction = environment.isProduction
-    return this.angularFireStore.collection('gstData').add(formData);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    formData.isProduction = environment.isProduction;
+     let responce = firstValueFrom(
+       this.http.post(
+         environment.baseUrl + '/GSTDetails/submit',
+         JSON.stringify(formData),
+         { headers }
+       )
+     );
+    return responce;
   }
 }
 
