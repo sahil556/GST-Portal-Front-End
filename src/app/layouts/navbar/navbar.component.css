@@ -56,11 +56,6 @@ header {
   /* Toggler button color */
 }
 
-.navbar-toggler-icon {
-  background-color: #6a11cb;
-  /* Toggler icon color */
-}
-
 /* Dropdown Menu */
 .nav-item.dropdown .dropdown-toggle {
   color: #291f1f;
@@ -91,7 +86,8 @@ header {
 
 /* Mobile Adjustments */
 @media (max-width: 991px) {
-  .navbar-nav {
+  .navbar
+   {
     text-align: center;
     width: 100%;
   }
