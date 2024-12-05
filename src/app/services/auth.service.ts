@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -15,7 +14,6 @@ export class AuthService {
   isLoggedinguard: boolean = false;
   constructor(
     private http: HttpClient,
-    private afauth: AngularFireAuth,
     private router: Router,
     private toastr: ToastrService
   ) {}
@@ -61,18 +59,19 @@ export class AuthService {
   }
 
   logout() {
-    this.afauth.signOut().then(() => {
+
       this.loggedIn.next(false);
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken');
       this.isLoggedinguard = false;
       this.toastr.success('Logged Out Successfully');
       this.router.navigate(['/login']);
-    });
   }
 
   resetPassword(email: string) {
-    let responce = this.afauth.sendPasswordResetEmail(email);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    let responce = firstValueFrom(this.http.post(environment.baseUrl + "/Auth/ResetPassword", JSON.stringify({email: email}), {headers}));
     return responce;
   }
 }
