@@ -43,11 +43,32 @@ export class NewGstRegistrationComponent {
   businessFields = businessFields;
 
   PropertyProofDocumentOptions = [
-    { type: "LeasedOrRented", documents: ["Lease / Rent Agreement",	"Property Tax Receiept", "Municipal Khata Book", "Index", "7/12", "Electric Bill"]},
-    { type: "ConsentOrShared", documents: ["NOC Notarised",	"Property Tax Receipt", "Municipal Khata Book", "Index", "7/12", "Electric Bill"]}
-  ]
+    {
+      type: 'LeasedOrRented',
+      documents: [
+        'Lease / Rent Agreement',
+        'Property Tax Receiept',
+        'Municipal Khata Book',
+        'Index',
+        '7/12',
+        'Electric Bill',
+      ],
+    },
+    {
+      type: 'ConsentOrShared',
+      documents: [
+        'NOC Notarised',
+        'Property Tax Receipt',
+        'Municipal Khata Book',
+        'Index',
+        '7/12',
+        'Electric Bill',
+      ],
+    },
+  ];
 
-  typeOfBusinessPropertyProofOptions: string[] = this.PropertyProofDocumentOptions[0].documents;
+  typeOfBusinessPropertyProofOptions: string[] =
+    this.PropertyProofDocumentOptions[0].documents;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -94,21 +115,17 @@ export class NewGstRegistrationComponent {
     return this.gstForm.controls[controlName] as FormControl;
   }
 
-  SelectionChange()
-  {
+  SelectionChange() {
     let selectedType = this.gstForm.value.typeOfBusinessProperty;
-    this.PropertyProofDocumentOptions.map(item =>{
-      if(item.type == selectedType)
-      {
+    this.PropertyProofDocumentOptions.map((item) => {
+      if (item.type == selectedType) {
         this.typeOfBusinessPropertyProofOptions = item.documents;
       }
-    })
+    });
 
-    this.gstForm.patchValue(
-      {
-        leasedOrRented: this.typeOfBusinessPropertyProofOptions[0]
-      }
-    );
+    this.gstForm.patchValue({
+      leasedOrRented: this.typeOfBusinessPropertyProofOptions[0],
+    });
   }
 
   async onSubmit() {
@@ -199,10 +216,10 @@ export class NewGstRegistrationComponent {
       this.leasedOrRentedImageUploadStatus =
       this.proofOfBusinessImageUploadStatus =
         '';
-      this.gstForm.patchValue({
-        typeOfBusinessProperty: 'LeasedOrRented',
-        leasedOrRented: [this.typeOfBusinessPropertyProofOptions[0]],
-      });
+    this.gstForm.patchValue({
+      typeOfBusinessProperty: 'LeasedOrRented',
+      leasedOrRented: [this.typeOfBusinessPropertyProofOptions[0]],
+    });
     this.IsApplicationSucceeded = false;
   }
 
@@ -229,23 +246,23 @@ export class NewGstRegistrationComponent {
         return;
       }
 
-      if (node == 'photo') {
-        console.log(file.type);
-        if (
-          file.type != 'image/jpg' &&
-          file.type != 'image/png' &&
-          file.type != 'image/jpeg'
-        ) {
-          fileTypeError = true;
-        }
-      } else if (
-        file.type != 'image/jpg' &&
-        file.type != 'image/png' &&
-        file.type != 'image/jpeg' &&
-        file.type != 'application/pdf'
-      ) {
-        fileTypeError = true;
-      }
+      // if (node == 'photo') {
+      //   console.log(file.type);
+      //   if (
+      //     file.type != 'image/jpg' &&
+      //     file.type != 'image/png' &&
+      //     file.type != 'image/jpeg'
+      //   ) {
+      //     fileTypeError = true;
+      //   }
+      // } else if (
+      //   file.type != 'image/jpg' &&
+      //   file.type != 'image/png' &&
+      //   file.type != 'image/jpeg' &&
+      //   file.type != 'application/pdf'
+      // ) {
+      //   fileTypeError = true;
+      // }
 
       if (fileTypeError) {
         if (formElementName != null)
@@ -289,49 +306,56 @@ export class NewGstRegistrationComponent {
       console.log('Before Uploading. validation passed');
       this.uploadImageAndSetURL(
         $event.target.files[0],
-        node + '/' + this.gstForm.value.panNumber + Date.now().toString(),
+        this.gstForm.value.panNumber + Date.now().toString(),
         node
       );
     }
   }
 
   uploadImageAndSetURL(image: File | undefined, filepath: string, key: string) {
-    this.registerService.uploadImage(image, filepath).subscribe({
-      complete: () => {
-        this.registerService.getDownloadURL(filepath).subscribe((url) => {
-          switch (key) {
-            case 'photo':
-              this.selectedUserImageUrl = url;
-              this.userImageUploadStatus = 'Uploaded';
-              break;
-            case 'pan':
-              this.selectedPanImageUrl = url;
-              this.panImageUploadStatus = 'Uploaded';
-              break;
-            case 'aadhar':
-              this.selectedAadharImageUrl = url;
-              this.aadharImageUploadStatus = 'Uploaded';
-              break;
-            case 'electricity':
-              this.selectedElectricityImageUrl = url;
-              this.electricityImageUploadStatus = 'Uploaded';
-              break;
-            case 'passbook':
-              this.selectedPassbookImageUrl = url;
-              this.passbookImageUploadStatus = 'Uploaded';
-              break;
-            case 'propertytaxreceipt':
-              this.selectedProofOfBusinessImageUrl = url;
-              this.proofOfBusinessImageUploadStatus = 'Uploaded';
-              break;
-            case 'leasedAgreement':
-              this.selectedleasedOrRentedImageUrl = url;
-              this.leasedOrRentedImageUploadStatus = 'Uploaded';
-              break;
-          }
-        });
-      },
-    });
+    this.registerService
+      .uploadImage(image, filepath)
+      .then((res) => {
+        let url = res.url;
+        this.updateUploadStatusBadgeAndSetURL(key, 'Uploaded', url);
+      })
+      .catch((err) => {
+        this.updateUploadStatusBadgeAndSetURL(key, '', '');
+        this.toast.warning(err.error, 'Please Select Appropriate File');
+      });
+  }
+
+  updateUploadStatusBadgeAndSetURL(key: string, status: string, url: string) {
+    switch (key) {
+      case 'photo':
+        this.selectedUserImageUrl = url;
+        this.userImageUploadStatus = status;
+        break;
+      case 'pan':
+        this.selectedPanImageUrl = url;
+        this.panImageUploadStatus = status;
+        break;
+      case 'aadhar':
+        this.selectedAadharImageUrl = url;
+        this.aadharImageUploadStatus = status;
+        break;
+      case 'electricity':
+        this.selectedElectricityImageUrl = url;
+        this.electricityImageUploadStatus = status;
+        break;
+      case 'passbook':
+        this.selectedPassbookImageUrl = url;
+        this.passbookImageUploadStatus = status;
+        break;
+      case 'propertytaxreceipt':
+        this.selectedProofOfBusinessImageUrl = url;
+        this.proofOfBusinessImageUploadStatus = status;
+        break;
+      case 'leasedAgreement':
+        this.selectedleasedOrRentedImageUrl = url;
+        this.leasedOrRentedImageUploadStatus = status;
+        break;
+    }
   }
 }
 

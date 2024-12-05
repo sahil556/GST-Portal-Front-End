@@ -23,29 +23,29 @@
                             <th>DOB</th>
                             <th>Aadhar Number</th>
                             <th>Mobile Number</th>
-                            
-                            
+
+
                             <th>Business Name</th>
                             <th>Start Date</th>
-                            
-                            
+
+
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody *ngIf="gstDataArray.length; else norecord">
                         <tr *ngFor="let userData of gstDataArray; index as i">
                             <td class="text-center">{{i+1}}</td>
-                            <td>{{userData.data.applicantName | titlecase}}</td>
-                            <td>{{userData.data.fatherName | titlecase}}</td>
-                            <td>{{userData.data.panNumber}}</td>
-                            <td>{{userData.data.dateOfBirth | date: "dd-MM-yyyy"}}</td>
-                            <td>{{userData.data.aadharCardNumber}}</td>
-                            <td>{{userData.data.mobileNumber}}</td>
-                            
-                            <td>{{userData.data.businessName | titlecase}}</td>
-                            <td>{{userData.data.businessStartDate | date: "dd-MM-yyyy"}}</td>
+                            <td>{{userData.applicantName | titlecase}}</td>
+                            <td>{{userData.fatherName | titlecase}}</td>
+                            <td>{{userData.panNumber}}</td>
+                            <td>{{userData.dateOfBirth | date: "dd-MM-yyyy"}}</td>
+                            <td>{{userData.aadharCardNumber}}</td>
+                            <td>{{userData.mobileNumber}}</td>
+
+                            <td>{{userData.businessName | titlecase}}</td>
+                            <td>{{userData.businessStartDate | date: "dd-MM-yyyy"}}</td>
                             <td>
-                               <button type="button" (click)="openDialog(userData.data)" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Show Details</button>
+                               <button type="button" (click)="openDialog(userData)" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Show Details</button>
                             </td>
                         </tr>
                     </tbody>
@@ -58,7 +58,7 @@
     <p>No Application Found</p>
 </ng-template>
 
-  
+
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">

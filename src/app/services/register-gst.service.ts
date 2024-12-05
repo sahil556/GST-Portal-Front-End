@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { GstForm } from '../models/gst-form';
-import { finalize, Observable } from 'rxjs';
-import { HttpEvent } from '@angular/common/http';
+import { finalize, firstValueFrom, Observable } from 'rxjs';
+import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -11,29 +11,22 @@ import { environment } from '../../environments/environment';
 })
 export class RegisterGstService {
 
-  constructor(private angularFireStore: AngularFirestore, private angularFireStorage: AngularFireStorage) { }
+  constructor(private http: HttpClient, private angularFireStore: AngularFirestore, private angularFireStorage: AngularFireStorage) { }
 
   downloadURL$ : Observable<string> | undefined
 
   uploadImage(image:any, filepath: string)
   {
-    // this.angularFireStorage.upload(filepath, image).then(() => {
-    //   this.angularFireStorage.ref(filepath).getDownloadURL().subscribe(url =>{
-    //     console.log("image uploaded ", url);
-    //     return url;
-    //   })
-    // });
-    const fileRef = this.angularFireStorage.ref(filepath);
-    const task = this.angularFireStorage.upload(filepath, image);
-    return task
-    .snapshotChanges()
-    .pipe(
-      finalize(() => {
-        this.downloadURL$ = fileRef.getDownloadURL();
-        this.downloadURL$.subscribe(url => {
-        });
-      })
-    )
+    const formData = new FormData();
+    formData.append('file', image, image.name);
+
+    let responce = firstValueFrom(
+      this.http.post<{ url: string }>(
+        environment.baseUrl + '/GSTDetails',
+        formData
+      )
+    );
+    return responce;
   }
 
   getDownloadURL(filePath: string)
