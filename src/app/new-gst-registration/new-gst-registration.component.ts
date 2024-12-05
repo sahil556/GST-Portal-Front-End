@@ -76,28 +76,28 @@ export class NewGstRegistrationComponent {
     private toast: ToastrService
   ) {
     this.gstForm = this.formBuilder.group({
-      title: ['sahil', Validators.required],
-      fatherName: ['sahi', Validators.required],
+      title: ['', Validators.required],
+      fatherName: ['', Validators.required],
       panNumber: [
-        '1234567891',
+        '',
         [Validators.required, Validators.minLength(10)],
       ],
-      dateOfBirth: ['2002-11-02', [Validators.required]],
-      aadharCard: ['1', [Validators.required]],
-      mobileNo: ['1', [Validators.required]],
+      dateOfBirth: ['', [Validators.required]],
+      aadharCard: ['', [Validators.required]],
+      mobileNo: ['', [Validators.required]],
       vleMobile: [''],
-      emailId: ['sa@gma', [Validators.required, Validators.email]],
-      address: ['12', [Validators.required]],
+      emailId: ['', [Validators.required, Validators.email]],
+      address: ['', [Validators.required]],
       applicantImg: ['', [Validators.required]],
       panCardImg: [''],
       aadharCardImg: [''],
       passbookImg: [''],
       electricityBillImg: ['', Validators.required],
-      businessName: ['sa', [Validators.required]],
-      businessStartDate: ['2002-11-03', [Validators.required]],
-      businessAddress: ['sa', [Validators.required]],
+      businessName: ['', [Validators.required]],
+      businessStartDate: ['', [Validators.required]],
+      businessAddress: ['', [Validators.required]],
       hsnCode: ['', [Validators.required]],
-      natureOfBusiness: ['sa', [Validators.required]],
+      natureOfBusiness: ['', [Validators.required]],
       typeOfBusinessProperty: ['LeasedOrRented', [Validators.required]],
       leasedOrRented: [this.typeOfBusinessPropertyProofOptions[0]],
       proofOfBusiness: ['proofOfBusiness'],
@@ -182,12 +182,13 @@ export class NewGstRegistrationComponent {
             'Application Submitted',
             { timeOut: 5000 }
           );
-          this.resetForm();
+          // this.resetForm();
           this.IsLoading = false;
           this.IsApplicationSucceeded = true;
         })
         .catch((err) => {
           let validationFailedProperties = "";
+          this.IsLoading = false;
           for (const [key, value] of Object.entries(err.error.errors)) {
               validationFailedProperties += `${key}, `
           }
@@ -197,7 +198,6 @@ export class NewGstRegistrationComponent {
             'Validation Failed for below properties',
             { timeOut: 10000 }
           );
-          this.IsLoading = false;
         });
     }
   }
