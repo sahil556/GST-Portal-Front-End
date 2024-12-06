@@ -40,10 +40,12 @@ body {
 
 .services-paragraph {
     font-size: 16px;
+    color: #000;
 }
 
 .services-listitems {
     font-size: 16px;
+    color: #111;
 }
 
 html, body { height: 100%; }

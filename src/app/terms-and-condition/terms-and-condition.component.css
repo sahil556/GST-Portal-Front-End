@@ -1,7 +1,44 @@
+/* General paragraph styling */
 p {
-    font-size: 15px;
+  font-size: 15px;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 15px;
 }
 
-p > strong {
-    font-size: 18px;
+/* Highlighted strong text */
+p>strong {
+  font-size: 18px;
+  color: #414042;
+}
+
+/* Section heading */
+.section-heading {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+/* Horizontal rule styling */
+hr {
+  border: 0;
+  border-top: 2px solid #ddd;
+  width: 50%;
+  margin: 20px auto;
+}
+
+/* Margins for the Terms & Conditions container */
+.col-lg-10 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+/* Optional: Add a background and padding to improve readability */
+.mb-4 {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
