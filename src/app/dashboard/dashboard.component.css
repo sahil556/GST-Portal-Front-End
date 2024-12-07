@@ -1,26 +1,279 @@
+/* Container for table and card */
+.container-fluid {
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+/* Card Styling */
+.card {
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.card.shadow-effect {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card.bg-theme-secondary {
+  background-color: #e9ecef;
+  color: #343a40;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-body h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-body p {
+  font-size: 16px;
+  color: #555;
+}
+
+/* Table Container */
 .table-container {
-    overflow-x: auto;
+  overflow-x: auto;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styling */
+.table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.table th {
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #dee2e6;
+}
+
+.table td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  color: #555;
+}
+
+.table thead th:first-child,
+.table tbody td:first-child {
+  width: 5%;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+  /* Alternating row color */
+}
+
+.table tbody tr:hover {
+  background-color: #e2e6ea;
+  /* Highlight row on hover */
+}
+
+/* Button Styling */
+.btn-success {
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: #28a745;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Strong Text */
+strong {
+  font-weight: 600;
+  color: black;
+}
+
+/* Text Link */
+a {
+  text-decoration: none;
+  color: white;
+}
+
+/* Additional spacing for action links/buttons */
+.image-link-btn {
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+/* Text Alignment for Table Data */
+td {
+  vertical-align: middle;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .card-body h3 {
+    font-size: 20px;
   }
 
-  strong {
-    font-weight: bold;
-    color: black;
+  .card-body p {
+    font-size: 14px;
   }
 
-  p {
-    color: rgb(40, 35, 35)
+  .table th,
+  .table td {
+    font-size: 13px;
+    padding: 8px;
   }
 
-  a {
-    text-decoration: none;
-    color: white;
+  .btn-success {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+}
+
+/* styling for the modal component */
+
+/* Modal General Styling */
+.modal-content {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: none;
+  overflow: hidden;
+}
+
+.modal-header {
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+}
+
+.modal-header img {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+.modal-title {
+  font-size: 20px;
+  flex-grow: 1;
+  margin: 0 20px;
+}
+
+.btn-close {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  color: white;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.btn-close:hover {
+  opacity: 1;
+}
+
+.modal-body {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.modal-body p {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.modal-body p strong {
+  color: #555;
+}
+
+.modal-body hr {
+  border: 0;
+  border-top: 1px solid #e0e0e0;
+  margin: 20px 0;
+}
+
+.image-link-btn {
+  margin: 5px;
+  font-size: 14px;
+
+  padding: 8px 12px;
+  border-radius: 5px;
+  background-color: #6c757d;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.image-link-btn a {
+  color: white;
+  text-decoration: none;
+}
+
+.image-link-btn:hover {
+  background-color: #5a6268;
+}
+
+.modal-footer {
+  background-color: #f1f1f1;
+  padding: 15px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+th {
+  font-weight: 500;
+}
+
+.modal-footer .btn-primary {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .modal-header img {
+    width: 60px;
+    height: 60px;
   }
 
-  .image-link-btn{
-    margin-right: 10px;
-    margin-top: 10px;
+  .modal-title {
+    font-size: 18px;
   }
 
-  td {
-    vertical-align: middle;
+  .modal-body p {
+    font-size: 14px;
   }
+
+  .image-link-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .modal-footer .btn-primary {
+    font-size: 13px;
+  }
+}
