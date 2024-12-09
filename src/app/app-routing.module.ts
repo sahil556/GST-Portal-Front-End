@@ -17,19 +17,72 @@ import { KpoAccountComponent } from './offerings/kpo-account/kpo-account.compone
 import { MapComponent } from './map-component/map-component.component';
 
 const routes: Routes = [
-  { path: '', component: NewGstRegistrationComponent},
-  { path: 'login', component: LoginComponent},
-  {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]},
-  {path: 'about-us', component: AboutusComponent},
-  {path: 'terms-and-conditions', component: TermsAndConditionComponent},
-  {path: 'services/audits-and-assurance', component: AuditsAndAssuranceComponent},
-  {path: 'services/taxation', component:TaxationComponent},
-  {path: 'services/risk-and-transaction-advisory', component:RiskAdvisoryComponent},
-  {path: 'services/international-taxation', component:InternationalTaxationComponent},
-  {path: 'services/corporate-support', component:CorporateSupportComponent},
-  {path: 'services/accrual-based-account', component:AccrualAccountingSystemComponent},
-  {path: 'services/accounting-system', component: AccountingSystemComponent},
-  {path: 'services/kpo-accounts', component: KpoAccountComponent}
+  {
+    path: '',
+    component: NewGstRegistrationComponent,
+    title: 'V & V Associates - Chartered Accountants',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    title: 'Login |  V & V Associates',
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [authGuard],
+    title: 'Home | V & V Associates',
+  },
+  {
+    path: 'about-us',
+    component: AboutusComponent,
+    title: 'About Us | V & V Associates',
+  },
+  {
+    path: 'terms-and-conditions',
+    component: TermsAndConditionComponent,
+    title: 'Terms & Conditions | V & V Associates',
+  },
+  {
+    path: 'services/audits-and-assurance',
+    component: AuditsAndAssuranceComponent,
+    title: 'GST Audits and Assurance | V & V Associates',
+  },
+  {
+    path: 'services/taxation',
+    component: TaxationComponent,
+    title: 'Taxation | V & V Associates',
+  },
+  {
+    path: 'services/risk-and-transaction-advisory',
+    component: RiskAdvisoryComponent,
+    title: 'Risk & Transaction Advisory | V & V Associates',
+  },
+  {
+    path: 'services/international-taxation',
+    component: InternationalTaxationComponent,
+    title: 'International Taxation | V & V Associates',
+  },
+  {
+    path: 'services/corporate-support',
+    component: CorporateSupportComponent,
+    title: 'Corporate Support | V & V Associates',
+  },
+  {
+    path: 'services/accrual-based-account',
+    component: AccrualAccountingSystemComponent,
+    title: 'Accrual Based Accounting System | V & V Associates',
+  },
+  {
+    path: 'services/accounting-system',
+    component: AccountingSystemComponent,
+    title: 'Accounting System | V & V Associates',
+  },
+  {
+    path: 'services/kpo-accounts',
+    component: KpoAccountComponent,
+    title: 'KPO Accounts & Tax | V & V Associates',
+  },
 ];
 
 @NgModule({
