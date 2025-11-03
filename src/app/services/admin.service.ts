@@ -19,7 +19,10 @@ export class AdminService {
   loadDataFromFirestore() {
     console.log('Is Production');
     console.log(environment.isProduction);
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+     });
 
     let responce = firstValueFrom(
       this.http.get<Array<GstForm>>(environment.baseUrl + '/GSTDetails', {

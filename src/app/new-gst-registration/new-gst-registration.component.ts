@@ -6,6 +6,7 @@ import { finalize, Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { fields } from './fields/personal-info';
 import { businessFields } from './fields/business-info';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-new-gst-registration',
@@ -129,7 +130,7 @@ export class NewGstRegistrationComponent {
   }
 
   async onSubmit() {
-    console.log('on submit is called');
+    // console.log('on submit is called');
     const formData: GstForm = {
       applicantName: this.gstForm.value.title,
       fatherName: this.gstForm.value.fatherName,
@@ -182,7 +183,7 @@ export class NewGstRegistrationComponent {
             'Application Submitted',
             { timeOut: 5000 }
           );
-          // this.resetForm();
+          this.resetForm();
           this.IsLoading = false;
           this.IsApplicationSucceeded = true;
         })
